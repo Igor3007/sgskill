@@ -1,0 +1,50 @@
+.moderator-aside__nav {
+    margin-bottom: 10px;
+}
+
+#status {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 15px 20px 20px 20px;
+    background: #59595a;
+    border-left: 4px solid #bbb;
+    font-size: 13px;
+    min-width: 300px;
+    transform: translateY(100%) translateY(20px);
+    transition: 0.3s ease;
+    color: #fff;
+    z-index: 100000;
+    max-width: 450px;
+    visibility: hidden;
+}
+
+
+.box-comments__send.btn-loading svg {
+    display: none
+}
+
+.box-comments__send.btn-loading button::after {
+    content: '';
+    width: 18px;
+    min-width: 18px;
+    height: 18px;
+    border: 2px solid #888;
+    border-radius: 50%;
+    border-left-color: transparent !important;
+    transition: transform 0.5s linear;
+    animation: 0.5s linear loadingrotate infinite;
+    display: inline-block;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    position: relative;
+}
+
+.lesson__task.lesson__task--reply {
+    border-color: #00abff;
+    background-color: #eceff2;
+}
+
+.box-comments__textarea textarea:focus {
+    height: 200px;
+}
