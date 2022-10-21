@@ -21,15 +21,16 @@
                 <div class="main-menu__nav">
                   <nav>
                     <ul>
-                      <li><a href="about.html">О фотографе</a></li>
-                      <li><a href="programs.html">Обучение</a></li>
-                      <li><a href="hall.html">Истории</a></li>
+                    <li><a href="/about/">О проекте</a></li>
+                    <li><a href="/blog/">Обучение</a></li>
+                    <li><a href="/blog/">Новости</a></li>
+                    <li><a href="/login/">Личный кабинет</a></li>
                     </ul>
                   </nav>
                 </div>
                 <div class="main-menu__phones">
-                  <div class="main-menu__number"><a href="#">+375 (33) 799 34 99</a></div>
-                  <div class="main-menu__worktime"><span>Работаем с 9.00 до 19.00</span></div>
+                  <div class="main-menu__number"><a href="#">+7 (999) 799-34-99</a></div>
+                  <div class="main-menu__worktime"><span>с 9.00 до 19.00</span></div>
                 </div>
               </div>
             </div>

@@ -1,9 +1,9 @@
 <?php
 
 $hostname = "localhost";
-$db_username = "root";
-$db_password = "";
-$db_name = "sgskills";
+$db_username = "sogood_skill";
+$db_password = "7&p&ZQOJ";
+$db_name = "sogood_skill";
 
 
 
