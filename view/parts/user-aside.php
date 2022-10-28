@@ -10,9 +10,13 @@
     <div class="moderator-aside__nav">
       <ul>
 
+        <? if($courses): ?>
+
           <?foreach($courses as $item):?>
             <li><a href="/user/cours/<?=$item['id']?>"><?=$item['name']?></a></li>
           <?endforeach;?>
+
+        <? endif; ?>
 
       </ul>
     </div>
