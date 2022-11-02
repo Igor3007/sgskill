@@ -15,12 +15,12 @@
               <div class="page-moderator__topbar">
                 <ul>
                    
-                  <li><a href="?view=course-create">Добавить курс</a></li>
+                  <li><a href="?view=lesson-create">Добавить новый урок</a></li>
                    
                 </ul>
               </div>
               <div class="page-moderator__main">
-                <div class="page-moderator__h1">Все курсы</div>
+                <div class="page-moderator__h1">Все уроки</div>
                  <table>
                   <tr>
                     <th>id</th>
@@ -29,7 +29,7 @@
                     <th>Окончание</th>
                   </tr>
 
-                  <? foreach($allCourses as $item): ?>
+                  <? foreach($allLesson as $item): ?>
                     <tr>
                       <td><?=$item['id']?></td>
                       <td><?=$item['name']?></td>

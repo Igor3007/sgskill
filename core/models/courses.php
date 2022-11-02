@@ -1,5 +1,7 @@
 <?php
+
 require_once($_SERVER['DOCUMENT_ROOT'].'/inc/config.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/core/db.php');
 
 function getUserCourses($ids){
 
@@ -23,6 +25,12 @@ function getAllCourses(){
     $query = mysqli_query($id_db, $sql) or die('error getUserCourses:'.mysqli_error($id_db));
 
     return $query ? mysqli_fetch_all($query, MYSQLI_ASSOC) : false;
+}
+
+function createCourse($params){
+
+    return mysql_insert_array('sll_courses', $params);
+     
 }
 
 

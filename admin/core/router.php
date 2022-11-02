@@ -11,6 +11,7 @@ $PAGE = [
 
     'STYLES' => [
         '/styles/admin.css',
+        '/styles/common.css',
         
     ],
 
@@ -53,6 +54,21 @@ switch($route){
 
     case 'course-list': 
         $PAGE['TEMPLATE'] = 'course-list';
+        require_once('controllers/CourseList.php');
+    break;
+    
+    case 'course-create': 
+        $PAGE['TEMPLATE'] = 'course-create';
+        //require_once('controllers/CourseList.php');
+    break;
+
+    case 'lesson-list': 
+        $PAGE['TEMPLATE'] = 'lesson-list';
+        require_once('controllers/LessonList.php');
+    break;
+
+    case 'lesson-create': 
+        $PAGE['TEMPLATE'] = 'lesson-create';
         require_once('controllers/CourseList.php');
     break;
 

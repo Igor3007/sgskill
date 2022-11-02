@@ -18,6 +18,18 @@ function getLessonList($id_course){
     return $query ? mysqli_fetch_all($query, MYSQLI_ASSOC) : false;
 }
 
+function getLessonListAll(){
+    global $id_db;
+
+    $sql = "SELECT *
+            FROM `sll_lesson`
+     ";
+
+    $query = mysqli_query($id_db, $sql) or die('error getLessonList:'.mysqli_error($id_db));
+
+    return $query ? mysqli_fetch_all($query, MYSQLI_ASSOC) : false;
+}
+
 function getLessonData($id){
     global $id_db;
 
@@ -68,6 +80,13 @@ function getTaskReplyData($lesson_id, $user_id){
     $query = mysqli_query($id_db, $sql) or die('error getTaskReplyData:'.mysqli_error($id_db));
 
     return mysqli_num_rows($query) > 1 ? mysqli_fetch_all($query, MYSQLI_ASSOC) : mysqli_fetch_assoc($query);
+}
+
+ 
+function createLesson($params){
+
+    return mysql_insert_array('sll_lesson', $params);
+     
 }
 
 
