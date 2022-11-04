@@ -1,5 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/inc/config.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/core/db.php');
 
 function getMediaData($ids){
 

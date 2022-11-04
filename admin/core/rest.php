@@ -16,6 +16,10 @@ switch($_GET['method']){
     case 'createLesson': 
         require_once('controllers/CreateLesson.php');
     break;
+
+    case 'uploadEditor': 
+        require_once('controllers/UploadEditor.php');
+    break;
     
      
 }

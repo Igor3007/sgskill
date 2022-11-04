@@ -15,7 +15,7 @@
               
               <div class="page-moderator__main">
                 <div class="page-moderator__h1">Добавить урок</div>
-                <form action="createLesson" method="POST" data-form="">
+                <form action="createLesson" method="POST" data-create-lesson="">
                   <div class="form">
                     <div class="form__item">
                       <div class="form__subitem">
@@ -98,38 +98,19 @@
                             <div class="editor">
                               <div class="editor__aside">
                                 <ul>
-                                  <li>Заголовок</li>
-                                  <li>Видео</li>
-                                  <li>Спойлер</li>
-                                  <li>Текст</li>
-                                  <li>аудио</li>
-                                  <li>Image</li>
+                                  <li data-editor-block="header" >Заголовок</li>
+                                  <li data-editor-block="video" >Видео</li>
+                                  <li data-editor-block="spoiler" >Спойлер</li>
+                                  <li data-editor-block="text" >Текст</li>
+                                  <li data-editor-block="audio" >аудио</li>
+                                  <li data-editor-block="image" >Image</li>
                                 </ul>
                               </div>
                               <div class="editor__content">
 
-                              <div class="editor__block">
-                                <div class="editor__block-remove">+</div>
-                                <div class="editor-header">
-                                  <input type="text" placeholder="Название заголовка">
-                                </div>
-                              </div>
-
-                              <div class="editor__block">
-                                <div class="editor__block-remove">+</div>
-                                <div class="editor-video">
-                                  <div class="editor-video__preview">
-                                    <picture>
-                                      <img src="" alt="">
-                                    </picture>
-                                  </div>
-
-                                  <div class="editor-video__link">
-                                    <input type="text" placeholder="Ссылка">
-                                  </div>
-                                  
-                                </div>
-                              </div>
+                                 <div class="editor__empty">
+                                  Выберайте нужные блоки в левой части редактора и создайте ваш пост!
+                                 </div>
 
                               </div>
                             </div>

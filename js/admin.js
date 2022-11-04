@@ -382,6 +382,38 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     }
 
+    //form create lesson
+    if (document.querySelector('[data-create-lesson]')) {
+
+        document.querySelector('[data-create-lesson]').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let form = this;
+            let formData = new FormData(this);
+
+            formData.append('content', window.editorInstanse.getResulsJson())
+
+            console.log(formData)
+
+            window.ajax({
+                type: 'POST',
+                url: URL_API + form.getAttribute('action'),
+                responseType: 'json',
+                data: formData,
+                btn: form.querySelector('[type="submit"]')
+            }, function (status, response) {
+                if (response.status) {
+                    window.STATUS.msg(response.msg)
+
+                } else {
+                    window.STATUS.err(response.msg)
+                }
+            })
+
+        })
+
+    }
+
 
 
 

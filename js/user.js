@@ -212,8 +212,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
         document.querySelectorAll('.video').forEach(item => {
             item.addEventListener('click', e => {
 
+                let id = item.dataset.id.split('/')
+
                 let iframe = document.createElement('iframe');
-                iframe.setAttribute('src', 'https://kinescope.io/embed/' + item.dataset.id + '?autoplay=1')
+                iframe.setAttribute('src', 'https://kinescope.io/embed/' + id[id.length - 1] + '?autoplay=1')
                 iframe.setAttribute('width', item.clientWidth + 'px')
                 iframe.setAttribute('height', (item.clientHeight) + 'px')
                 iframe.setAttribute('allowfullscreen', 'true')

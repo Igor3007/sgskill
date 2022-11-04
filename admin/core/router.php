@@ -69,6 +69,8 @@ switch($route){
 
     case 'lesson-create': 
         $PAGE['TEMPLATE'] = 'lesson-create';
+        $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
+        $PAGE['SCRIPTS'][] = '/js/editor.js';
         require_once('controllers/CourseList.php');
     break;
 
