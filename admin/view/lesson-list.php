@@ -14,9 +14,7 @@
             <div class="page-moderator__content">
               <div class="page-moderator__topbar">
                 <ul>
-                   
                   <li><a href="?view=lesson-create">Добавить новый урок</a></li>
-                   
                 </ul>
               </div>
               <div class="page-moderator__main">
@@ -32,9 +30,9 @@
                   <? foreach($allLesson as $item): ?>
                     <tr>
                       <td><?=$item['id']?></td>
-                      <td><?=$item['name']?></td>
+                      <td><a href="?view=lesson-edit&id=<?=$item['id']?>"> <?=$item['name']?> </a></td>
                       <td>12</td>
-                      <td>11 </td>
+                      <td>11</td>
                     </tr>
                   <? endforeach; ?>
 

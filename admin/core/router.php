@@ -74,6 +74,13 @@ switch($route){
         require_once('controllers/CourseList.php');
     break;
 
+    case 'lesson-edit': 
+        $PAGE['TEMPLATE'] = 'lesson-edit';
+        $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
+        $PAGE['SCRIPTS'][] = '/js/editor.js';
+        require_once('controllers/EditLesson.php');
+    break;
+
     case 'rest': 
         require_once('rest.php');
     break;
