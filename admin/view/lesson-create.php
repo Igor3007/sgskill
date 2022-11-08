@@ -48,7 +48,7 @@
                     <div class="form__item">
 
                       <div class="form__subitem">
-                        <input type="text" name="name" placeholder="Название курса">
+                        <input type="text" name="name" placeholder="Название урока">
                       </div>
 
                     </div>
@@ -98,18 +98,20 @@
                             <div class="editor">
                               <div class="editor__aside">
                                 <ul>
-                                  <li data-editor-block="header" >Заголовок</li>
-                                  <li data-editor-block="video" >Видео</li>
-                                  <li data-editor-block="spoiler" >Спойлер</li>
-                                  <li data-editor-block="text" >Текст</li>
-                                  <li data-editor-block="audio" >аудио</li>
-                                  <li data-editor-block="image" >Image</li>
+                                  <li data-editor-block="header" > <span class="ic_header" title="Заголовок" ></span> </li>
+                                  <li data-editor-block="video" > <span class="ic_video" title="Видео" ></span> </li>
+                                  <li data-editor-block="image" > <span class="ic_image" title="Image" ></span> </li>
+                                  <li data-editor-block="audio" > <span class="ic_audio" title="аудио" ></span> </li>
+                                  <li data-editor-block="text" > <span class="ic_text" title="Текст" ></span> </li>
+                                  <li data-editor-block="spoiler"> <span class="ic_spoiler" title="Спойлер" > </li>
+                                  <li data-editor-block="task" > <span class="ic_task" title="Задание" ></span> </li>
+                                  <li data-editor-block="file" > <span class="ic_file" title="файл" ></span> </li>
                                 </ul>
                               </div>
                               <div class="editor__content">
 
                                  <div class="editor__empty">
-                                  Выберайте нужные блоки в левой части редактора и создайте ваш пост!
+                                  Выбирайте нужные блоки в левой части редактора и создайте ваш пост!
                                  </div>
 
                               </div>

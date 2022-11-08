@@ -25,7 +25,10 @@ $params = [
 
 //image
 if($_FILES['image']['size']){
-    $saveFile = uploadFile($_FILES['image']);
+    
+    $saveFile = uploadFile([
+        'file' => $_FILES['image']
+    ]);
 
     if($saveFile['status']){
         $params['image'] = $saveFile['id'];

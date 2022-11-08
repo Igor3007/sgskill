@@ -32,7 +32,7 @@
                   <? foreach($allCourses as $item): ?>
                     <tr>
                       <td><?=$item['id']?></td>
-                      <td><?=$item['name']?></td>
+                      <td><a href="?view=course-edit&id=<?=$item['id']?>"><?=$item['name']?></a></td>
                       <td>12</td>
                       <td>11 </td>
                     </tr>

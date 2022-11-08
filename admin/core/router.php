@@ -56,6 +56,11 @@ switch($route){
         $PAGE['TEMPLATE'] = 'course-list';
         require_once('controllers/CourseList.php');
     break;
+
+    case 'course-edit': 
+        $PAGE['TEMPLATE'] = 'course-edit';
+        //require_once('controllers/CourseList.php');
+    break;
     
     case 'course-create': 
         $PAGE['TEMPLATE'] = 'course-create';

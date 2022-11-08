@@ -63,7 +63,9 @@ if(!empty($post['password'])){
 
 //image
 if($_FILES['photo']['size']){
-    $saveFile = uploadFile($_FILES['photo']);
+    $saveFile = uploadFile([
+        'file' => $_FILES['image']
+    ]);
 
     if($saveFile['status']){
         $params['photo'] = $saveFile['id'];

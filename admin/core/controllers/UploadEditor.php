@@ -2,13 +2,28 @@
  
  
 if($_FILES['file']['size']){
-    $saveFile = uploadFile($_FILES['file']);
+
+    if($_POST['type'] == 'image'){
+        $saveFile = uploadFile([
+            'file' => $_FILES['file'],
+        ]);
+    }
+
+    if($_POST['type'] == 'file'){
+        $saveFile = uploadFile([
+            'file' => $_FILES['file'],
+            'path' => '/uploads/files/',
+            'type' => 'files'
+        ]);
+    }
+
+    
 
     if($saveFile['status']){
 
         exit(json_encode([
             'status' => true,
-            'msg' => 'файл загружен',
+            'msg' => 'Файл загружен',
             'file' => [
                 'id' => $saveFile['id'],
                 'orig' => $saveFile['orig'],
@@ -19,7 +34,7 @@ if($_FILES['file']['size']){
     }else {
         exit(json_encode([
             'status' => false,
-            'msg' => 'UploadEditor: Ошибка загрузки файл',
+            'msg' => 'UploadEditor: Ошибка загрузки файлa',
              
         ]));
     }

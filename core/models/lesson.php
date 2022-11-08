@@ -88,6 +88,11 @@ function createLesson($params){
     return mysql_insert_array('sll_lesson', $params);
      
 }
+function setLessonData($params, $id){
+
+    return mysql_update_array('sll_lesson', $params, $id);
+     
+}
 
 
 

@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             xhr.onreadystatechange = function () {
 
                 if (xhr.readyState == 3) {
-                    //params.btn.classList.add('btn-loading')
+                    window.STATUS.msg('Загрузка файла...')
                     console.log('loading...')
                 }
 
@@ -31,18 +31,20 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     setTimeout(function () {
                         //params.btn.classList.remove('btn-loading')
                         console.log('loaded')
+                        // window.STATUS.msg('Завершение...')
                     }, 1000)
                 }
 
             };
         }
 
-        upload(callback) {
+        upload(type, callback) {
 
 
             let formData = new FormData();
 
             formData.append('file', this.files.item(0))
+            formData.append('type', type)
 
             let params = {
                 data: formData
@@ -51,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             this.ajax(params, function (status, response) {
                 console.log(response)
 
-                if (response.msg) {
+                if (response.status) {
                     window.STATUS.msg(response.msg)
                 } else {
                     window.STATUS.err(response.msg)
@@ -86,6 +88,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
     class editorComponentVideo {
         constructor() {}
 
+        init(block) {
+            this.uploadFile(block)
+        }
+
         createElement() {
             this.elem = document.createElement('div')
             this.elem.innerHTML = this.template()
@@ -101,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
 
                 let uploadInstanse = new editorFileUpload(e.target.files)
-                uploadInstanse.upload((event) => {
+                uploadInstanse.upload('image', (event) => {
 
                     element.querySelector('[data-upload-src]').src = event.file.orig
                     element.querySelector('[data-upload-src]').dataset.uploadSrc = event.file.orig
@@ -118,10 +124,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
             <div class="editor-video">
                 <div class="editor-video__preview">
                     <picture>
-                        <img src="/img/common/lesson.jpg" data-upload-src="" alt="">
+                        <img src="/img/common/default_img.jpg" data-upload-src="" alt="">
                         <label class="attach-file-editor">
                             <input type="file" name="file-editor">
-                            <span> Выбрать файл </span>
+                            <span> <i class="ic_upload" ></i> Выбрать файл </span>
                         </label>
                     </picture>
                 </div>
@@ -164,12 +170,47 @@ document.addEventListener('DOMContentLoaded', function (event) {
     class editorComponentAudio {
         constructor() {}
 
+        init(block) {
+            this.uploadFile(block)
+        }
+
         template() {
             return `
             <div class="editor-audio">
-                <input type="text" placeholder="Ссылка на mp3">
+                <div class="editor-audio__field">
+                    <input type="text" data-file-link="file" placeholder="Ссылка на mp3">
+                    <label class="attach-link" >
+                        <input type="file" name="file-editor">
+                        <span class="ic_upload" ></span>
+                    </label>
+                </div>
             </div>
             `
+        }
+
+        uploadFile(element) {
+            element.querySelector('[type="file"]').addEventListener('change', e => {
+
+                let uploadInstanse = new editorFileUpload(e.target.files)
+                uploadInstanse.upload('file', (event) => {
+
+                    element.querySelector('[data-file-link="file"]').value = window.location.protocol + '//' + window.location.host + event.file.orig
+
+                })
+
+
+            })
+        }
+
+        createElement() {
+            this.elem = document.createElement('div')
+            this.elem.innerHTML = this.template()
+            this.uploadFile(this.elem)
+            return this.elem;
+        }
+
+        getElement() {
+            return this.createElement()
         }
     }
 
@@ -177,6 +218,19 @@ document.addEventListener('DOMContentLoaded', function (event) {
         constructor() {
             this.createElement()
             this.elem = null;
+        }
+
+        init(block) {
+
+            this.elem = block;
+            this.uploadFile(block);
+
+            block.querySelectorAll('.editor-gallery picture').forEach(item => {
+                this.removeImage(item)
+            })
+
+            this.initSortable();
+
         }
 
         removeImage(element) {
@@ -196,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 }
 
                 let uploadInstanse = new editorFileUpload(e.target.files)
-                uploadInstanse.upload((event) => {
+                uploadInstanse.upload('image', (event) => {
 
                     let file = document.createElement('picture')
                     file.innerHTML = '<img data-upload-src="' + event.file.orig + '" src="' + event.file.orig + '" alt=""> <span class="egallery-remove">+</span>'
@@ -204,14 +258,21 @@ document.addEventListener('DOMContentLoaded', function (event) {
                     this.elem.querySelector('.editor-gallery__images').append(file)
 
 
-                    new Sortable(this.elem.querySelector('.editor-gallery__images'), {
-                        animation: 150,
-                        direction: 'horizontal',
-                    });
+                    //init sortable
+
+                    this.initSortable();
+
                 })
 
 
             })
+        }
+
+        initSortable() {
+            new Sortable(this.elem.querySelector('.editor-gallery__images'), {
+                animation: 150,
+                direction: 'horizontal',
+            });
         }
 
         createElement() {
@@ -243,6 +304,71 @@ document.addEventListener('DOMContentLoaded', function (event) {
         }
     }
 
+    class editorComponentTask {
+        constructor() {}
+
+        template() {
+            return `
+                <div class="editor-text">
+                    <input type="text"  data-task="header" placeholder="Заголовок "> 
+                    <textarea  data-task="text" placeholder="Описание задачи"></textarea>
+                </div>
+            `
+        }
+    }
+
+    class editorComponentFile {
+        constructor() {}
+
+        init(block) {
+            this.uploadFile(block)
+        }
+
+        template() {
+            return `
+                <div class="editor-file">
+                    <div class="editor-file__field" >
+                        <input type="text" data-file-link="header" placeholder="Заголовок">
+                    </div>
+
+                    <div class="editor-file__field" >
+                        <input type="text" data-file-link="file" placeholder="Ссылка на файл">
+                        <label class="attach-link" >
+                            <input type="file" name="file-editor">
+                            <span class="ic_upload" ></span>
+                        </label>
+                    </div>
+                </div>
+            `
+        }
+
+        uploadFile(element) {
+            element.querySelector('[type="file"]').addEventListener('change', e => {
+
+                let uploadInstanse = new editorFileUpload(e.target.files)
+                uploadInstanse.upload('file', (event) => {
+
+                    element.querySelector('[data-file-link="file"]').value = window.location.protocol + '//' + window.location.host + event.file.orig
+
+                })
+
+
+            })
+        }
+
+        createElement() {
+            this.elem = document.createElement('div')
+            this.elem.innerHTML = this.template()
+            this.uploadFile(this.elem)
+            return this.elem;
+        }
+
+        getElement() {
+            return this.createElement()
+        }
+
+    }
+
 
     class postEditor {
 
@@ -252,6 +378,36 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
 
             this.addEvents()
+        }
+
+        loadEditor(blocks) {
+            blocks.forEach(item => {
+
+                // init remove block
+                this.removeBlock(item)
+
+
+                switch (item.dataset.contentBlock) {
+
+                    case 'video':
+                        new editorComponentVideo().init(item)
+                        break;
+
+                    case 'image':
+                        new editorComponentImage().init(item)
+                        break;
+
+                    case 'audio':
+                        new editorComponentAudio().init(item)
+                        break;
+                    case 'file':
+                        new editorComponentFile().init(item)
+                        break;
+
+                }
+            })
+
+            this.initSortable()
         }
 
         removeBlock(elem) {
@@ -285,7 +441,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
         insertBlock(props) {
 
-            this.$el.querySelector('.editor__empty').style.display = 'none'
+            if (this.$el.querySelector('.editor__empty')) {
+                this.$el.querySelector('.editor__empty').style.display = 'none'
+            }
 
             const mainTemplate = this.createTemplateBlock(props.name)
             const blockTemplate = document.createElement('div')
@@ -303,19 +461,15 @@ document.addEventListener('DOMContentLoaded', function (event) {
             }
 
 
+            this.initSortable()
 
+        }
 
+        initSortable() {
             new Sortable(document.querySelector('.editor__content'), {
                 animation: 150,
                 handle: '.editor__block-handle'
             });
-
-
-
-
-
-
-
         }
 
         addEvents() {
@@ -331,6 +485,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                                 name: item.dataset.editorBlock
                             })
                             break;
+
                         case 'video':
                             this.insertBlock({
                                 elem: new editorComponentVideo().getElement(),
@@ -338,6 +493,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                                 name: item.dataset.editorBlock
                             })
                             break;
+
                         case 'spoiler':
                             this.insertBlock({
                                 elem: new editorComponentSpoiler().template(),
@@ -345,6 +501,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                                 name: item.dataset.editorBlock
                             })
                             break;
+
                         case 'text':
                             this.insertBlock({
                                 elem: new editorComponentText().template(),
@@ -352,17 +509,35 @@ document.addEventListener('DOMContentLoaded', function (event) {
                                 name: item.dataset.editorBlock
                             })
                             break;
+
                         case 'audio':
                             this.insertBlock({
-                                elem: new editorComponentAudio().template(),
-                                type: 'string',
+                                elem: new editorComponentAudio().getElement(),
+                                type: 'element',
                                 name: item.dataset.editorBlock
                             })
                             break;
+
                         case 'image':
                             this.insertBlock({
                                 elem: new editorComponentImage().getElement(),
                                 type: 'element',
+                                name: item.dataset.editorBlock
+                            })
+                            break;
+
+                        case 'file':
+                            this.insertBlock({
+                                elem: new editorComponentFile().getElement(),
+                                type: 'element',
+                                name: item.dataset.editorBlock
+                            })
+                            break;
+
+                        case 'task':
+                            this.insertBlock({
+                                elem: new editorComponentTask().template(),
+                                type: 'string',
                                 name: item.dataset.editorBlock
                             })
                             break;
@@ -427,6 +602,26 @@ document.addEventListener('DOMContentLoaded', function (event) {
                         })
 
                         break;
+
+                    case 'task':
+
+                        arrayResult.push({
+                            type: block.dataset.contentBlock,
+                            header: block.querySelector('[data-task="header"]').value,
+                            text: block.querySelector('[data-task="text"]').value,
+                        })
+
+                        break;
+
+                    case 'file':
+
+                        arrayResult.push({
+                            type: block.dataset.contentBlock,
+                            header: block.querySelector('[data-file-link="header"]').value,
+                            text: block.querySelector('[data-file-link="file"]').value,
+                        })
+
+                        break;
                 }
 
             })
@@ -438,5 +633,17 @@ document.addEventListener('DOMContentLoaded', function (event) {
     }
 
     window.editorInstanse = new postEditor('.editor')
+
+
+    // load 
+
+    if (document.querySelector('.editor__block')) {
+
+        let blocks = document.querySelectorAll('.editor__block');
+
+        window.editorInstanse.loadEditor(blocks)
+
+
+    }
 
 });
