@@ -20,6 +20,10 @@ switch($_GET['method']){
     case 'uploadEditor': 
         require_once('controllers/UploadEditor.php');
     break;
+
+    case 'remove': 
+        require_once('controllers/Remove.php');
+    break;
     
      
 }

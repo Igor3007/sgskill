@@ -23,16 +23,16 @@
                   <tr>
                     <th>id</th>
                     <th>Название</th>
-                    <th>Начало</th>
-                    <th>Окончание</th>
+                    <th>Курс</th>
+                    <th>Продолжительность</th>
                   </tr>
 
                   <? foreach($allLesson as $item): ?>
                     <tr>
                       <td><?=$item['id']?></td>
                       <td><a href="?view=lesson-edit&id=<?=$item['id']?>"> <?=$item['name']?> </a></td>
-                      <td>12</td>
-                      <td>11</td>
+                      <td><?=$cousres[$item['course_id']]['name']?></td>
+                      <td><?=$item['length']?></td>
                     </tr>
                   <? endforeach; ?>
 

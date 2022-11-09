@@ -31,7 +31,7 @@ $params = [
     'length' => $post['length'], 
     'status' => $post['status'], 
     'stop' => $post['stop'], 
-    'content' => $post['content'], 
+    'content' => addslashes($post['content']), 
 
 ];
 

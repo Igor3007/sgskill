@@ -414,6 +414,44 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     }
 
+    //remove element
+
+    if (document.querySelector('[data-remove]')) {
+
+        let elem = document.querySelector('[data-remove]');
+        let data = new FormData();
+
+        elem.addEventListener('click', function () {
+
+            if (!confirm('Вы действительно хотите удалить ?')) return false;
+
+            data.append('action', elem.dataset.remove)
+            data.append('id', elem.dataset.removeId)
+
+            window.ajax({
+                type: 'POST',
+                url: URL_API + 'remove',
+                responseType: 'json',
+                data,
+                btn: false,
+
+            }, function (status, response) {
+                if (response.status) {
+                    window.STATUS.msg(response.msg)
+
+                    if (response.reload) {
+                        window.location.reload()
+                    }
+
+                } else {
+                    window.STATUS.err(response.msg)
+                }
+            })
+
+        })
+
+    }
+
 
 
 

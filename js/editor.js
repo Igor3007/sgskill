@@ -328,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
             return `
                 <div class="editor-file">
                     <div class="editor-file__field" >
-                        <input type="text" data-file-link="header" placeholder="Заголовок">
+                        <input type="text" data-file-link="header" placeholder="Название файла">
                     </div>
 
                     <div class="editor-file__field" >

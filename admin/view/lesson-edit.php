@@ -12,6 +12,13 @@
               </div>
             </div>
             <div class="page-moderator__content">
+
+            <div class="page-moderator__topbar">
+                <ul>
+                  <li><a data-remove="removeLesson" data-remove-id="<?=$lessonData['id']?>" >Удалить урок</a></li>
+                  <li><a href="/user/lesson/<?=$lessonData['id']?>" target="_blank">Посмотреть на сайте</a></li>
+                </ul>
+            </div>
               
               <div class="page-moderator__main">
                 <div class="page-moderator__h1">Редактировать урок</div>

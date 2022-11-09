@@ -46,19 +46,31 @@ function parseLesson($item){
             return '
             
             <div class="lesson-box__spoiler">
-                <div class="lesson-box__spoiler-title">Договор оферты</div>
-                <div class="lesson-box__spoiler-text"> '.$item['text'].' </div>
+                <div class="lesson-box__spoiler-text"> '.nl2br($item['text']).' </div>
                 <div class="lesson-box__spoiler-btn">Показать полностью </div>
             </div>
 
             ';
             
             break;
+
         case 'text':
             
-            return ' <div class="lesson-box__text">'.$item['text'].'</div> ';
+            return ' <div class="lesson-box__text">'.nl2br($item['text']).'</div> ';
             
             break;
+
+        case 'task':
+            
+            return ' <div class="lesson-box__task">
+                        <div class="lesson__task">
+                            '.($item['header'] ? '<div class="lesson__title">'.$item['header'].'</div>':'').'
+                            '.($item['text'] ? '<div class="lesson__text">'.nl2br($item['text']).'</div>':'').'
+                        </div>
+                    </div> ';
+            
+            break;
+
         case 'audio':
             
             return '
@@ -68,6 +80,25 @@ function parseLesson($item){
             ';
             
             break;
+
+        case 'file':
+            
+            return '
+                <div class="lesson-box__file">
+                    <div class="lesson-box__wrp">
+                        <div class="lesson-box__file-icon">
+                            <span class="ic_download" ></span>
+                        </div>
+                        <div class="lesson-box__file-name">'.$item['header'].'</div>
+                        <div class="lesson-box__file-link">
+                            <a href="'.$item['text'].'" download="" title=" Скачать '.$item['header'].' " >Скачать</a>
+                        </div>
+                    </div>
+                </div>
+            ';
+            
+            break;
+
         case 'image':
 
             $gallery = '';

@@ -150,6 +150,50 @@ function activeSelect($array, $active){
 
 }
 
+function setDates($date, $set){
+    
+    $month = array(
+        '01' => 'Января',
+        '02' => 'Февраля',
+        '03' => 'Марта',
+        '04' => 'Апреля',
+        '05' => 'Мая',
+        '06' => 'Июня',
+        '07' => 'Июля',
+        '08' => 'Августа',
+        '09' => 'Сентября',
+        '10' => 'Октября',
+        '11' => 'Ноября',
+        '12' => 'Декабря'
+            );
+    
+    $weekday = array(
+        1 => 'Понедельник',
+        2 => 'Вторник',
+        3 => 'Среда',
+        4 => 'Четверг',
+        5 => 'Пятница',
+        6 => 'Суббота',
+        7 => 'Воскресенье'
+    );
+    $arrDates = explode(' ', $date);
+    $date = explode('-', $arrDates[0]); 
+    $time = explode(':', $arrDates[1]); 
+
+    $return = '';
+    
+    if($set[0]){
+        $return .= '<span class="set_day">'.$date[2].'</span> <span class="set_month">'.$month[$date[1]].'</span> <span class="set_year">'.$date[0].'</span>'; 
+    }
+    
+    if($set[1]){
+        $return .= '<span class="set_week">'.$weekday[date("w", mktime(0, 0, 0, $date[1], $date[2], $date[0]))].'</span>';
+    }
+    
+    return  $return;
+    
+}
+
 $country = [
     'ru' => 'Россия',
     'by' => 'Беларусь',

@@ -8,6 +8,10 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/core/models/media.php');
 $lessonData = getLessonData($_GET['id']);
 $allCourses = getAllCourses();
 
+if(!$lessonData['id']){
+    header('location: /admin/cp.php?view=lesson-list');
+}
+
 $arraySelect  = [];
 
 foreach($allCourses as $item) {

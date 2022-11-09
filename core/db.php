@@ -64,5 +64,25 @@ function mysql_insert_array($table, $data, $exclude = array()) {
    }
 
 }
+/* ===============================================================
+DELETE
+===============================================================*/
 
+function mysql_remove_array($params){
+
+    $id = array_keys($params);
+    $id = $id[0];
+    $value = $params[$id];
+    require('../inc/config.php');
+
+    $sql = "DELETE FROM `$params[table]` WHERE $id=$value";
+    $query = mysqli_query($id_db, $sql);
+    
+    if($query){
+        return array('status' => true );
+    }else{
+        return array('status' => false, 'err' => mysqli_error($id_db));
+    }
+    
+}
 ?>

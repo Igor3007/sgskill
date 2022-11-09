@@ -33,8 +33,8 @@
                     <tr>
                       <td><?=$item['id']?></td>
                       <td><a href="?view=course-edit&id=<?=$item['id']?>"><?=$item['name']?></a></td>
-                      <td>12</td>
-                      <td>11 </td>
+                      <td><?=setDates($item['date_start'], array(true, false))?></td>
+                      <td><?=setDates($item['date_finish'], array(true, false))?></td>
                     </tr>
                   <? endforeach; ?>
 
