@@ -414,6 +414,38 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     }
 
+    //form edit course
+    if (document.querySelector('[data-edit-course]')) {
+
+        document.querySelector('[data-edit-course]').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let form = this;
+            let formData = new FormData(this);
+
+            formData.append('lineup', window.cousreLessonEditorInstanse.getResulsJson())
+
+            console.log(formData)
+
+            window.ajax({
+                type: 'POST',
+                url: URL_API + form.getAttribute('action'),
+                responseType: 'json',
+                data: formData,
+                btn: form.querySelector('[type="submit"]')
+            }, function (status, response) {
+                if (response.status) {
+                    window.STATUS.msg(response.msg)
+
+                } else {
+                    window.STATUS.err(response.msg)
+                }
+            })
+
+        })
+
+    }
+
     //remove element
 
     if (document.querySelector('[data-remove]')) {
@@ -451,6 +483,199 @@ document.addEventListener('DOMContentLoaded', function (event) {
         })
 
     }
+
+    /* ==================================================
+    sort lesson in cousre
+    ==================================================*/
+
+    if (document.querySelector('.lesson-list')) {
+
+
+
+        class cousreLessonEditor {
+            constructor(params) {
+                this.$el = (params.elem ? document.querySelector(params.elem) : false)
+
+                this.addEvent()
+            }
+
+            addEvent() {
+                this.$el.querySelector('[data-cle="addSeparator"]').addEventListener('click', e => {
+                    this.appendItem({
+                        type: 'separator',
+                        name: ''
+                    })
+                })
+            }
+
+            createLesson(data) {
+                const template = `
+                <span class="sort-handler"></span> 
+                <span class="lesson-list-item"> ${data.name}</span>
+                <span class="ic_remove" ></span>
+            `;
+
+                const elem = document.createElement('li');
+
+                elem.innerHTML = template;
+                elem.dataset.type = 'lesson'
+                elem.dataset.id = data.id
+
+                elem.querySelector('.ic_remove').addEventListener('click', e => e.target.closest('li').remove())
+
+                return elem
+            }
+
+            createSeparator(data) {
+                const template = `
+                <span class="sort-handler"></span> <span class="lesson-list-separator"> 
+                <input type="text" placeholder="Название главы" value="${data.name}"></span>
+                <span class="ic_remove" ></span>
+            `;
+
+                const elem = document.createElement('li')
+                elem.innerHTML = template;
+                elem.dataset.type = 'separator'
+
+                elem.querySelector('.ic_remove').addEventListener('click', e => e.target.closest('li').remove())
+
+                return elem
+            }
+
+            initSortable() {
+                new Sortable(document.querySelector('.lesson-list__list ul'), {
+                    animation: 150,
+                    handle: '.sort-handler',
+                    direction: 'vertical'
+                });
+            }
+
+            appendItem(item) {
+
+                const container = this.$el.querySelector('.lesson-list__list ul')
+
+                switch (item.type) {
+                    case 'lesson':
+                        container.append(this.createLesson(item));
+                        break;
+                    case 'separator':
+                        container.append(this.createSeparator(item));
+                        break;
+
+                    default:
+                        console.err('No selected type element')
+                }
+
+            }
+
+            loadList(json) {
+
+                const arrayData = JSON.parse(json);
+
+                arrayData.forEach(item => {
+                    this.appendItem(item)
+                })
+
+                this.initSortable()
+
+            }
+
+            getResulsJson() {
+
+                const arr = [];
+
+                this.$el.querySelectorAll('[data-type]').forEach(item => {
+
+                    function getName(item) {
+                        if (item.dataset.type == 'lesson') return item.querySelector('.lesson-list-item').innerText
+                        if (item.dataset.type == 'separator') return item.querySelector('[type="text"]').value
+                    }
+
+                    arr.push({
+                        type: item.dataset.type,
+                        id: item.dataset.id,
+                        name: getName(item),
+                    })
+                })
+
+                return JSON.stringify(arr)
+            }
+        }
+
+
+
+        window.cousreLessonEditorInstanse = new cousreLessonEditor({
+            elem: '.lesson-list'
+        })
+
+        if (LOAD_SJON) {
+            window.cousreLessonEditorInstanse.loadList(LOAD_SJON);
+        }
+    }
+
+
+
+
+
+
+    /* ============================================
+    popup select lesson
+    ============================================*/
+
+    if (document.querySelector('[data-cle="addLesson"]')) {
+
+        document.querySelector('[data-cle="addLesson"]').addEventListener('click', function (event) {
+
+
+
+            let selectLesson = new customModal()
+            let url = URL_API + 'getLessons';
+
+
+            selectLesson.open('<div>Loading...</div>', function (instanse) {
+
+                window.ajax({
+                    type: 'GET',
+                    url: url,
+                }, function (status, response) {
+
+                    selectLesson.changeContent(response)
+
+                    selectLesson.modal.querySelector('[data-cle="addLessonFromPopup"]').addEventListener('click', function (e) {
+
+                        const containerUL = selectLesson.modal.querySelector('.popup-select-lesson__list ul')
+                        const resultArray = [];
+
+                        containerUL.querySelectorAll('[type="checkbox"]').forEach(input => {
+                            if (input.checked) {
+                                resultArray.push({
+                                    type: 'lesson',
+                                    id: input.value,
+                                    name: input.dataset.name
+                                })
+                            }
+                        })
+
+                        window.cousreLessonEditorInstanse.loadList(JSON.stringify(resultArray));
+
+
+                        selectLesson.close()
+
+
+                    })
+
+
+
+                })
+            })
+
+
+
+        })
+
+    }
+
+
 
 
 

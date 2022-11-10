@@ -19,6 +19,7 @@ $params = [
     'preview_text' => $post['preview_text'],
     'date_finish' => $post['date_finish'],
     'date_start' => $post['date_start'],
+    'lineup' => addslashes($post['lineup']),
 ];
 
  

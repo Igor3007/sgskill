@@ -16,6 +16,17 @@ function getUserData($email){
     return $query ? mysqli_fetch_assoc($query) : false;
 }
 
+function getCourseDataID($id){
+
+    global $id_db;
+
+    $sql = "SELECT * FROM `sll_users` WHERE `id` = '$id'  ";
+    $query = mysqli_query($id_db, $sql) or die('error getCourseDataID:'.mysqli_error($id_db));
+
+    return mysqli_num_rows($query) > 1 ? mysqli_fetch_all($query, MYSQLI_ASSOC) : mysqli_fetch_assoc($query);
+}
+
+
 function getUserlist($params){
     global $id_db;
 

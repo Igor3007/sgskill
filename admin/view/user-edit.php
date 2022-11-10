@@ -20,116 +20,109 @@
                 </ul>
               </div>
               <div class="page-moderator__main">
-                <div class="page-moderator__h1">Добавить пользователя</div>
-                <form action="#" method="POST">
+                <div class="page-moderator__h1">Редактировать пользователя</div>
+
+
+                 
+
+                <form action="createUser" method="POST" data-form="">
                   <div class="form">
                     <div class="form__item">
                       <div class="form__subitem">
-                                        <div class="form-image">
-                                          <div class="form-image__cover form-image__cover--round active" data-image-upload="form">
-                                            <div class="form-image__btn">
-                                              <label class="attach-label"><span class="bgimage lazyload" data-bg="/img/common/camera.png"></span><span class="text-upload">Выбрать файл</span>
-                                                <input type="file" name="poster-img" data-attach="poster">
-                                              </label>
-                                            </div>
-                                            <div class="form-image__image form-image__image--round">
-                                              <picture><img src="" data-attach="preview-poster"></picture>
-                                            </div>
-                                          </div>
-                                          <div class="form-image__progress hide">
-                                            <div class="progress-bar">
-                                              <div class="progress-bar__title">Зарузка 66%</div>
-                                              <div class="progress-bar__state"><span style="width: 66%"></span></div>
-                                            </div>
-                                          </div>
-                                        </div>
+                        <div class="form-image">
+                          <div class="form-image__cover form-image__cover--round active cover--loaded" data-image-upload="form">
+                            <div class="form-image__btn">
+                              <label class="attach-label"><span class="bgimage lazyload" data-bg="/img/common/camera.png"></span><span class="text-upload">Выбрать файл</span>
+                                <input type="file" name="image" data-attach="poster">
+                              </label>
+                            </div>
+                            <div class="form-image__image form-image__image--round">
+                              <picture><img src="<?=getMediaURL($userData['photo'])['orig']?>" data-attach="preview-poster"></picture>
+                            </div>
+                          </div>
+                        
+                        </div>
                       </div>
                     </div>
                     <div class="form__label">Личные данные</div>
                     <div class="form__item">
                       <div class="form__subitem">
-                        <input type="text" placeholder="Имя Фамилия">
+                        <input type="text" name="name" placeholder="Имя Фамилия" value="<?=$userData['name']?>">
                       </div>
                       <div class="form__subitem">
-                        <input type="text" placeholder="Email">
+                        <input type="text" name="email"  placeholder="Email" value="<?=$userData['email']?>">
                       </div>
                       <div class="form__subitem">
-                        <input type="text" placeholder="Пароль">
-                      </div>
-                    </div>
-                    <div class="form__item">
-                      <div class="form__subitem">
-                        <select placeholder="Страна">
-                          <option>Выбрать</option>
-                        </select>
-                      </div>
-                      <div class="form__subitem">
-                        <select placeholder="Пол">
-                          <option>Выбрать</option>
-                        </select>
-                      </div>
-                      <div class="form__subitem">
-                        <select placeholder="Год">
-                          <option>Выбрать</option>
-                        </select>
+                        <input type="text" name="pass" placeholder="Пароль" value="">
                       </div>
                     </div>
                     <div class="form__item">
                       <div class="form__subitem">
-                        <select placeholder="Группа доступа">
-                          <option>Пользователь</option>
-                          <option>Администратор</option>
-                          <option>Модератор</option>
+                        <select name="country" required="required" placeholder="Страна">
+                          <?=activeSelect($country, $userData['country'])?>
                         </select>
                       </div>
                       <div class="form__subitem">
-                        <select placeholder="Статус">
-                          <option>Разблокирован</option>
-                          <option>Заблокирован</option>
+                        <input type="text" name="city" placeholder="Город" value="<?=$userData['city']?>">
+                      </div>
+                      
+                    </div>
+                    <div class="form__item">
+                    <div class="form__subitem">
+                        <select name="sex" required="required" placeholder="Пол">
+                          <?=activeSelect($sex, $userData['sex'])?>
+                        </select>
+                      </div>
+                      <div class="form__subitem">
+                        <select name="year" required="required" placeholder="Год рождения">
+                          <? for($i = 1980; $i <= 2022; $i++): ?>
+                            <? echo '<option '.($i == $userData['year'] ? 'selected="selected"':'' ).' value="'.$i.'" >'.$i.'</option>';?>
+                          <? endfor; ?>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form__item">
+                      <div class="form__subitem">
+                        <select name="access" placeholder="Группа доступа" name="access">
+                          <?=activeSelect($access, $userData['access']) ?>
+                        </select>
+                      </div>
+                      <div class="form__subitem">
+                        <select placeholder="Статус" name="status">
+                        <?=activeSelect([
+                            '1' => 'Разблокирован',
+                            '0' => 'Заблокирован',
+                          ], $userData['status'])?>
+
                         </select>
                       </div>
                     </div>
                     <div class="form__label">Доступные курсы</div>
+                    
+
+                      <? if($allCourses): ?>
+                        <? foreach($allCourses as $item): ?>
+                          <div class="form__item">
+                            <div class="form__subitem">
+                              <label class="checkbox">
+                                <input type="checkbox" name="courses[]" value="<?=$item['id']?>" <?=(in_array($item['id'], $userCourseId) ? 'checked':'')?> />
+                                <span class="checkbox__elem"></span>
+                                <span class="checkbox__text"><?=$item['name']?></span>
+                              </label>
+                            </div>
+                          </div>
+                      <? endforeach; ?>
+
+                      <? else: ?>
+                        <div>Курсы не найдены</div>
+                      <? endif; ?>
+
+                      <br>
+                      <br>
+                    
                     <div class="form__item">
                       <div class="form__subitem">
-                        <label class="checkbox">
-                          <input type="checkbox" name="undefined"/><span class="checkbox__elem"></span><span class="checkbox__text">Наставничество</span>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="form__item">
-                      <div class="form__subitem">
-                        <label class="checkbox">
-                          <input type="checkbox" name="undefined"/><span class="checkbox__elem"></span><span class="checkbox__text">Наставничество</span>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="form__item">
-                      <div class="form__subitem">
-                        <label class="checkbox">
-                          <input type="checkbox" name="undefined"/><span class="checkbox__elem"></span><span class="checkbox__text">Наставничество</span>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="form__item">
-                      <div class="form__subitem">
-                        <label class="checkbox">
-                          <input type="checkbox" name="undefined"/><span class="checkbox__elem"></span><span class="checkbox__text">Наставничество</span>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="form__item">
-                      <div class="form__subitem">
-                        <label class="checkbox">
-                          <input type="checkbox" name="undefined"/><span class="checkbox__elem"></span><span class="checkbox__text">Наставничество</span>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="form__item">
-                      <div class="form__subitem"></div>
-                    </div>
-                    <div class="form__item">
-                      <div class="form__subitem">
+                        <input type="hidden" name="user_id" value="<?=$_GET['id']?>">
                         <button class="btn btn-full">Сохранить</button>
                       </div>
                       <div class="form__subitem"></div>

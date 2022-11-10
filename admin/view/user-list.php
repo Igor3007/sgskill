@@ -24,25 +24,23 @@
                  <table>
                   <tr>
                     <th>id</th>
+                    <th></th>
                     <th>Имя пользователя</th>
                     <th>Email</th>
-                    <th>Уровень</th>
+                    <th>Доступ</th>
                   </tr>
 
-                  <?
-                  
-                  $access = [
-                    '1' => 'Пользователь',
-                    '2' => 'Модератор',
-                    '3' => 'Администратор',
-                  ];
-
-                  ?>
+                   
 
                   <? foreach($allUsers as $item): ?>
                     <tr>
                       <td><?=$item['id']?></td>
-                      <td><?=$item['name']?></td>
+                      <td>
+                        <a href="/admin/cp.php?view=user-edit&id=<?=$item['id']?>">
+                          <span class="img-table-64" style="background-image: url(<?=getMediaURL($item['photo'])['orig']?>)" ></span>
+                        </a>
+                      </td>
+                      <td><a href="/admin/cp.php?view=user-edit&id=<?=$item['id']?>"><?=$item['name']?></a></td>
                       <td><?=$item['email']?></td>
                       <td><?=$access[$item['access']]?></td>
                     </tr>

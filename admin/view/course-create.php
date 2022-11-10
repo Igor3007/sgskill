@@ -15,7 +15,7 @@
               
               <div class="page-moderator__main">
                 <div class="page-moderator__h1">Добавить курс</div>
-                <form action="createCourse" method="POST" data-form="">
+                <form action="createCourse" method="POST" data-edit-course="">
                   <div class="form">
                     <div class="form__item">
                       <div class="form__subitem">
@@ -69,6 +69,30 @@
                     </div>
                      
                     <div class="form__label">Уроки курса</div>
+
+                    <? if(true): ?>
+
+                      <div class="lesson-list">
+
+                          <div class="lesson-list__list">
+                            <ul> </ul>
+                          </div>
+
+                          <div class="lesson-list__action">
+                            <ul>
+                              <li><div class="btn btn-small" data-cle="addLesson" >Добавить уроки</div></li>
+                              <li><div class="btn btn-small" data-cle="addSeparator" >Добавить Главу</div></li>
+                            </ul>
+                          </div>
+
+                          <script> const LOAD_SJON = false; </script>
+
+                        </div>
+
+
+                    <? else: ?>
+                      <div>Уроки не найдены</div>
+                    <? endif; ?>
 
                      
                     <div class="form__item">

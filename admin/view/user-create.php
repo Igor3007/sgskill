@@ -66,8 +66,8 @@
                           <option value="kz" >Казахстан</option>
                         </select>
                       </div>
-                      <div class="form__subitem" name="city">
-                        <input type="text" placeholder="Город">
+                      <div class="form__subitem">
+                        <input type="text" placeholder="Город"  name="city">
                       </div>
                     </div>
                     <div class="form__item">
@@ -88,9 +88,7 @@
                     <div class="form__item">
                       <div class="form__subitem">
                         <select placeholder="Группа доступа" name="access">
-                          <option value="1" >Пользователь</option>
-                          <option value="2" >Администратор</option>
-                          <option value="3" >Модератор</option>
+                          <?=activeSelect($access, '0') ?>
                         </select>
                       </div>
                       <div class="form__subitem">

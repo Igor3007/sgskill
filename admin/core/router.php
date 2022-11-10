@@ -50,6 +50,7 @@ switch($route){
 
     case 'user-edit': 
         $PAGE['TEMPLATE'] = 'user-edit';
+        require_once('controllers/EditUser.php');
     break;
 
     case 'course-list': 
@@ -59,11 +60,14 @@ switch($route){
 
     case 'course-edit': 
         $PAGE['TEMPLATE'] = 'course-edit';
+        $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
+        
         require_once('controllers/EditCourse.php');
     break;
     
     case 'course-create': 
         $PAGE['TEMPLATE'] = 'course-create';
+        $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
         //require_once('controllers/CourseList.php');
     break;
 

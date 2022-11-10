@@ -15,7 +15,7 @@ if(empty($post['name'])) {
 
 
 //password
-if(strlen($post['pass']) < 6  ){
+if(strlen($post['pass']) < 6  &&  !empty($post['pass'])  ) {
     exit(json_encode([
         'status' => false,
         'msg' => 'Пароль должен быть не менее 6 символов'
@@ -30,10 +30,12 @@ if(empty($post['email'])) {
     ]));
 }
 
-if(getUserData($post['email'])){
+$userData = getUserData($post['email']);
+
+if($userData['id'] != $post['user_id'] && $userData['email'] == $post['email']){
     exit(json_encode([
         'status' => false,
-        'msg' => 'Такой Email уже зарегистрирован'
+        'msg' => 'Такой Email уже зарегистрирован',
     ]));
 }
 
@@ -44,8 +46,10 @@ $params = [
     'name' => $post['name'],
     'country' => $post['country'],
     'sex' => $post['sex'],
+    'city' => $post['city'],
+    'access' => $post['access'],
+    'status' => $post['status'],
     'year' => $post['year'],
-    
 ];
 
 if(count($post['courses'])){
@@ -67,19 +71,36 @@ if($_FILES['image']['size']){
     }
 }
 
-$query = createUser($params);
+if($post['user_id']){
 
-if($query){
-    exit(json_encode([
-        'status' => true,
-        'msg' => 'Сохранено'
-    ]));
+    $query = setUserData($params, array( 'id' => $post['user_id'] ));
+
+    if($query){
+        exit(json_encode([
+            'status' => true,
+            'msg' => 'Сохранено'
+        ]));
+    }
+
 }else{
+    $query = createUser($params);
+
+    if($query){
+        exit(json_encode([
+            'status' => true,
+            'msg' => 'Добавлен новый пользователь!'
+        ]));
+    }
+}
+
+
+
+ 
     exit(json_encode([
         'status' => false,
         'msg' => 'Ошибка соединения с базой'
     ]));
-}
+ 
 
 exit();
 

@@ -24,6 +24,10 @@ switch($_GET['method']){
     case 'remove': 
         require_once('controllers/Remove.php');
     break;
+
+    case 'getLessons': 
+        require_once('controllers/_popupGetLessons.php');
+    break;
     
      
 }
