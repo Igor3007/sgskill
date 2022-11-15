@@ -80,6 +80,8 @@ function uploadFile($setting){
         'mp3' => 'mp3',
         'MP3' => 'mp3',
         'doc' => 'doc',
+        'docx' => 'docx',
+        'DOCX' => 'docx',
         'XLS' => 'xls',
         'xls' => 'xls',
         'ZIP' => 'zip',
@@ -148,6 +150,15 @@ function activeSelect($array, $active){
         echo '<option '.($key == $active ? 'selected="selected"':'' ).' value="'.$key.'" >'.$value.'</option>';
     }
 
+}
+
+function debug($arr) {
+
+    echo '<pre>';
+    print_r($arr);
+    echo '</pre>';
+
+     
 }
 
 function setDates($date, $set){

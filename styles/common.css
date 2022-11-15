@@ -384,6 +384,18 @@
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHdpZHRoPSIyNCI+PHBhdGggZD0iTTYuNCAxOUw1IDE3LjZsNS42LTUuNkw1IDYuNCA2LjQgNWw1LjYgNS42TDE3LjYgNSAxOSA2LjQgMTMuNCAxMmw1LjYgNS42LTEuNCAxLjQtNS42LTUuNnoiLz48L3N2Zz4=);
 }
 
+.ic_done-double {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDAiIHdpZHRoPSI0MCI+PHBhdGggZD0iTTEyLjEyNSAyOS43OTJsLTkuMjA4LTkuMjA5IDEuODc1LTEuODc1IDcuMzMzIDcuMzM0TDE0IDI3LjkxN3ptNy40NTggMGwtOS4yMDgtOS4yMDkgMS44NzUtMS44NzUgNy4zMzMgNy4zMzQgMTUuNjI1LTE1LjY2NyAxLjkxNyAxLjg3NXptMC03LjQ1OWwtMS44NzUtMS44NzVMMjcuNzUgMTAuMzc1bDEuODc1IDEuOTE3eiIvPjwvc3ZnPg==);
+}
+
+.ic_done {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDAiIHdpZHRoPSI0MCI+PHBhdGggZD0iTTE1Ljc5MiAyOS44MzNsLTkuMzc1LTkuMzc1IDItMiA3LjM3NSA3LjQxNyAxNS43OTEtMTUuNzkyIDEuOTU5IDJ6Ii8+PC9zdmc+);
+}
+
+.ic_arrow-left {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNiIgaGVpZ2h0PSIxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMSAxbDQgNC00IDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+);
+}
+
 
 .editor__aside li span {
     width: 34px;
@@ -643,4 +655,160 @@ table a {
     font-size: 16px;
     text-transform: uppercase;
     font-weight: normal;
+}
+
+.lesson-box__audio audio {
+    width: 100%;
+}
+
+
+span[data-timer="day"]::after {
+    content: attr(data-title);
+    margin-left: 3px;
+}
+
+span[data-timer="min"]::after,
+span[data-timer="hour"]::after {
+    content: ':';
+}
+
+
+span[data-timer="sec"] {
+    min-width: 17px;
+}
+
+.lesson__access-timer {
+    background-color: #d9d9d9;
+    padding: 5px 11px;
+    border-radius: 6px;
+    margin-left: 10px;
+}
+
+.lesson__access {
+    display: flex;
+    align-items: center;
+}
+
+.lesson__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lesson__access-timer span {
+    display: inline-block;
+}
+
+
+
+.lesson__next-title {
+    text-align: center;
+    color: #707070;
+    padding-bottom: 8px;
+}
+
+.lesson__next-name {
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px;
+    color: #333;
+    padding-bottom: 30px;
+}
+
+.lesson__next-btn {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+
+.cours-detail__item.cours-detail__item--locked {
+    filter: grayscale(1);
+    opacity: 0.7;
+    cursor: default;
+    pointer-events: none;
+}
+
+.cours-detail__item.cours-detail__item--completed .card-lesson__arrow {
+    background-color: #a22ecc;
+}
+
+
+.card-lesson__arrow .ic_arrow-left,
+.card-lesson__arrow .ic_done,
+.card-lesson__arrow .ic_done-double {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.card-lesson__arrow .ic_arrow-left {
+
+    width: 18px;
+    height: 18px;
+
+}
+
+.cours-detail__item.cours-detail__item--passed {
+    filter: grayscale(1);
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.card-lesson__info {
+    padding-top: 6px;
+}
+
+.courses-block__item,
+.card-lesson {
+    cursor: pointer;
+}
+
+.card-lesson__arrow {
+    background-color: #19aa15;
+}
+
+.info-msg {
+    background-color: #eee;
+    padding: 15px;
+    border-left: 2px solid #0087ff;
+    margin: 30px auto;
+}
+
+@media screen and (min-width: 767px) {
+    .lesson-box__audio audio {
+        max-width: 50%;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .head-moderator__title h1 {
+        font-size: 24px;
+    }
+
+    .head-moderator__breadcrumb li::after {
+        margin: 0 0.2em;
+        position: relative;
+        top: 1px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .head-moderator__breadcrumb ul {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .lesson__access-title {
+        display: none;
+    }
 }

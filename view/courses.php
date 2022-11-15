@@ -4,7 +4,7 @@
   <? if($courses): ?>
 
   <?foreach($courses as $item):?>
-    <div class="courses-block__item">
+    <div class="courses-block__item" onclick="window.location.href='/user/cours/<?=$item['id']?>'">
       <div class="card-cours">
         <div class="card-cours__image">
           <picture>

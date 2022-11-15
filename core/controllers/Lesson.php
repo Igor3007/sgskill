@@ -4,10 +4,22 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/core/models/lesson.php');
  
 $lesson_id = $route[2][0];
 
+$CurrentlessonProp = getLessonProps($lesson_id, $_SESSION['user']['id']);
+
+//если набрали ссылку руками
+if(!$CurrentlessonProp['state']) {
+    exit(header('location: /user/courses/')); 
+}
+
 $lesson = getLessonData($lesson_id);
-$taskReply = getTaskReplyData($lesson_id, $_SESSION['user']['id']);
+//$taskReply = getTaskReplyData($lesson_id, $_SESSION['user']['id']);
 
 $lessonContent = json_decode($lesson['content'], true);
+$lessonProps = getLessonProps($lesson_id, $_SESSION['user']['id']);
+
+//debug($lessonProps);
+
+$nextLesson = getNextLesson($lesson_id);
 
 function parseLesson($item){
 
@@ -91,7 +103,7 @@ function parseLesson($item){
                         </div>
                         <div class="lesson-box__file-name">'.$item['header'].'</div>
                         <div class="lesson-box__file-link">
-                            <a href="'.$item['text'].'" download="" title=" Скачать '.$item['header'].' " >Скачать</a>
+                            <a target="_blank" href="'.$item['text'].'" download="" title=" Скачать '.$item['header'].' " >Скачать</a>
                         </div>
                     </div>
                 </div>
@@ -127,6 +139,6 @@ function parseLesson($item){
  
 
 $PAGE['h1'] = $lesson['name'];
-$PAGE['BREADCRUMBS']['/user/cours/'.$lesson['course_id']] = 'Курс';
+$PAGE['BREADCRUMBS']['/user/cours/'.$lesson['course_id']] = $lesson['name'];
 
 ?>

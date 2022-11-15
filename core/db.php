@@ -3,25 +3,37 @@
 UPDATE
 ===============================================================*/
 
-function mysql_update_array($table, $params, $id){
+function mysql_update_array($table, $params, $where){
     global $id_db;
      
     $params_query = '';
-    $id_key = array_keys($id);
-    $id_key = $id_key[0];
-    $id_value = $id[$id_key];
+    $params_where = false;
+
+    foreach($where as $key=>$value){
+
+
+        if(!$params_where) {
+            $params_where .='`'.$key.'`=\''.$value.'\'';  
+        }else{
+            $params_where .=' AND `'.$key.'`=\''.$value.'\'';  
+        }
+    }
+
+   
     
     foreach($params AS $key => $value){
-        if($id['fn']){
+        if($where['fn']){
            $params_query .='`'.$key.'`='.$value.',';  
         }else{
            $params_query .='`'.$key.'`=\''.$value.'\',';  
         }
         
     }
+
+    //exit($params_where);
     
     $params_query =  substr($params_query, 0, -1);
-    $sql = "UPDATE $table SET $params_query WHERE $id_key=$id_value";
+    $sql = "UPDATE `$table` SET $params_query WHERE $params_where";
     
     if(mysqli_query($id_db, $sql)){
         return array( "status" => true);

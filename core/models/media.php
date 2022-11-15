@@ -16,6 +16,8 @@ function getMediaData($ids){
 
     $query = mysqli_query($id_db, $sql) or die('error getMediaData:'.mysqli_error($id_db));
 
+   
+
     return mysqli_num_rows($query) > 1 ? mysqli_fetch_all($query, MYSQLI_ASSOC) : mysqli_fetch_assoc($query);
 }
 

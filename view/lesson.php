@@ -1,30 +1,68 @@
 <div class="lesson">
                   <div class="lesson__details">
-                    <div class="lesson__current">Урок 1 из 12</div>
-                    <div class="lesson__stop">Необходимо выполнить задание</div>
+                    <div class="lesson__item">
+                      <div class="lesson__current">Урок <strong><?=$nextLesson['details']['number']?></strong> из <strong><?=$nextLesson['details']['total']?></strong></div>
+                      <div class="lesson__access">
+                        <div class="lesson__access-title">Закончится через:</div>
+                        <div class="lesson__access-timer" data-timer-start="<?=$lessonProps['date_start']?>">
+                          <span data-timer="day" >00</span>
+                          <span data-timer="hour" >00</span> 
+                          <span data-timer="min" >00</span>
+                          <span data-timer="sec" >00</span>
+                          </div>
+                      </div>
+                    </div>
+                    
+                    
                   </div>
                   <div class="lesson__content">
                     <div class="lesson-box">
                       
+                      <? if($lessonContent): ?>
                       
                        <?foreach($lessonContent as $item):?>
 
                         <?=parseLesson($item)?>
 
                        <?endforeach;?>
+
+                      <? else: ?>
+
+                        <div class="info-msg" > Нет содержимого для урока </div>
+
+                      <? endif; ?>
                       
                        
                       
                     </div>
                   </div>
+
+                  <? if($nextLesson['next']['props']): ?>
+                  
+                  <div class="lesson__next">
+                    <div class="lesson__next-title">Следующий урок:</div>
+                    <div class="lesson__next-name"><?=$nextLesson['next']['data']['name']?></div>
+                    <div class="lesson__next-btn">
+                      <a href="/user/lesson-next/<?=$lesson_id?>">
+                        <button class="btn">Перейти к следующему уроку</button></a>
+                      </a>
+                    </div>
+                  </div>
+
+                  <? endif; ?>
+
+
+                  
+                  </div>
+
+                  <? if(false): ?> 
+                    
                   <div class="lesson__nav">
                     <div class="lesson__nav-prev"><a href="">
                         <button class="btn">Предыдущий урок</button></a></div>
                     <div class="lesson__nav-next"><a href="">
                         <button class="btn">Следующий урок</button></a></div>
                   </div>
-
-                  <? if(false): ?>
 
                   <div class="lesson__title">Задание</div>
                   <div class="lesson__task">

@@ -6,10 +6,12 @@ document.addEventListener('DOMContentLoaded', function (event) {
         }
 
         ajax(params, response) {
+
+            window.STATUS.msg('Загрузка файла...')
+
             let xhr = new XMLHttpRequest();
 
             xhr.responseType = 'json';
-
             xhr.open('POST', '/admin/cp.php?view=rest&method=uploadEditor')
             xhr.send(params.data)
             xhr.onload = function () {
@@ -21,6 +23,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
             };
 
             xhr.onreadystatechange = function () {
+
+                if (xhr.readyState == 1) {
+                    window.STATUS.msg('Загрузка файла...')
+                    console.log('loading...')
+                }
 
                 if (xhr.readyState == 3) {
                     window.STATUS.msg('Загрузка файла...')
@@ -194,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 let uploadInstanse = new editorFileUpload(e.target.files)
                 uploadInstanse.upload('file', (event) => {
 
-                    element.querySelector('[data-file-link="file"]').value = window.location.protocol + '//' + window.location.host + event.file.orig
+                    element.querySelector('[data-file-link="file"]').value = event.file.orig
 
                 })
 
@@ -348,7 +355,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 let uploadInstanse = new editorFileUpload(e.target.files)
                 uploadInstanse.upload('file', (event) => {
 
-                    element.querySelector('[data-file-link="file"]').value = window.location.protocol + '//' + window.location.host + event.file.orig
+                    element.querySelector('[data-file-link="file"]').value = event.file.orig
 
                 })
 

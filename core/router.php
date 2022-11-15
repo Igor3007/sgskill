@@ -85,6 +85,11 @@ switch($route[0]){
                 require_once('controllers/Lesson.php');
             break;
 
+            case 'lesson-next':
+
+                require_once('controllers/LessonNext.php');
+            break;
+
             case 'profile':
                 $PAGE['BREADCRUMBS']['/user/profile'] = 'Профиль';
                 $PAGE['TEMPLATE'] = 'profile';
