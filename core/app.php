@@ -46,10 +46,10 @@ function uploadFile($setting){
                 ]));
             }
 
-            if($params['file']['size'] > 500000){
+            if($params['file']['size'] > 1000000){
                 exit(json_encode([
                     'status' => false,
-                    'msg' => 'Размер файла должен быть не более 500 кб',
+                    'msg' => 'Размер файла должен быть не более 1MB',
                 ]));
             }
 
@@ -57,7 +57,7 @@ function uploadFile($setting){
 
         case 'files' : 
 
-            if($params['file']['size'] > 5000000){
+            if($params['file']['size'] > 100000000){ 
                 exit(json_encode([
                     'status' => false,
                     'msg' => 'Размер файла должен быть не более 5MB',
