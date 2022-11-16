@@ -24,7 +24,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/view/parts/header-login.php');
                 <div class="head-moderator__title">
                   <h1><?=$PAGE['h1']?></h1>
                 </div>
-                <div class="head-moderator__desc"><?=$PAGE['desc']?></div>
+                <?=($PAGE['desc'] ? '<div class="head-moderator__desc">'.$PAGE['desc'].'</div>':'')?>
               </div>
               <div class="main-moderator">
                 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/view/'.$PAGE['TEMPLATE'].'.php');?>

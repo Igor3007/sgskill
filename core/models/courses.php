@@ -22,7 +22,7 @@ function getAllCourses(){
     global $id_db;
 
     $sql = "SELECT * FROM `sll_courses` ";
-    $query = mysqli_query($id_db, $sql) or die('error getUserCourses:'.mysqli_error($id_db));
+    $query = mysqli_query($id_db, $sql) or die('error getAllCourses:'.mysqli_error($id_db));
 
     return $query ? mysqli_fetch_all($query, MYSQLI_ASSOC) : false;
 }
@@ -34,7 +34,7 @@ function getCourseData($id){
     global $id_db;
 
     $sql = "SELECT * FROM `sll_courses` WHERE `id` = '$id'  ";
-    $query = mysqli_query($id_db, $sql) or die('error getUserCourses:'.mysqli_error($id_db));
+    $query = mysqli_query($id_db, $sql) or die('error getCourseData:'.mysqli_error($id_db));
 
     return mysqli_num_rows($query) > 1 ? mysqli_fetch_all($query, MYSQLI_ASSOC) : mysqli_fetch_assoc($query);
 }

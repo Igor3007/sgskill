@@ -2,16 +2,33 @@
                   <div class="lesson__details">
                     <div class="lesson__item">
                       <div class="lesson__current">Урок <strong><?=$nextLesson['details']['number']?></strong> из <strong><?=$nextLesson['details']['total']?></strong></div>
-                      <div class="lesson__access">
-                        <div class="lesson__access-title">Закончится через:</div>
-                        <div class="lesson__access-timer" data-timer-start="<?=$lessonProps['date_start']?>">
-                          <span data-timer="day" >00</span>
-                          <span data-timer="hour" >00</span> 
-                          <span data-timer="min" >00</span>
-                          <span data-timer="sec" >00</span>
-                          </div>
-                      </div>
+                     
+                      <?if($lessonProps['date_start']): ?>
+
+                        <div class="lesson__access">
+                          <div class="lesson__access-title">Закончится через:</div>
+                          <div class="lesson__access-timer" data-timer-start="<?=$lessonProps['date_start']?>">
+                            <span data-timer="day" >00</span>
+                            <span data-timer="hour" >00</span> 
+                            <span data-timer="min" >00</span>
+                            <span data-timer="sec" >00</span>
+                            </div>
+                        </div>
+                        
+                      <? endif; ?>
+                      
+
                     </div>
+
+                    <?if($_SESSION['user']['access'] > 1): ?>
+
+                      <div class="lesson__item">
+                        <ul class="admin-menu" >
+                          <li><a href="/admin/cp.php?view=lesson-edit&id=<?=$lesson_id?>" target="_blank">Редактировать урок</a></li>
+                        </ul>
+                      </div>
+
+                    <? endif; ?>
                     
                     
                   </div>

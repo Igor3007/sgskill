@@ -28,7 +28,7 @@ function createBlockEditor($block){
         case 'file': 
 
             return '<div class="editor__block" data-content-block="file"> 
-             
+            <div class="editor__block-icon"><span class="ic_'.$block['type'].'" ></span> </div>
             <div class="editor__block-remove">+</div>
             <div class="editor__block-handle"></div>
              <div>
@@ -51,7 +51,7 @@ function createBlockEditor($block){
         case 'task': 
 
             return '<div class="editor__block" data-content-block="task"> 
-             
+            <div class="editor__block-icon"><span class="ic_'.$block['type'].'" ></span> </div>
             <div class="editor__block-remove">+</div>
             <div class="editor__block-handle"></div>
              <div>
@@ -65,7 +65,7 @@ function createBlockEditor($block){
         case 'spoiler': 
 
             return '<div class="editor__block" data-content-block="spoiler"> 
-             
+            <div class="editor__block-icon"><span class="ic_'.$block['type'].'" ></span> </div>
             <div class="editor__block-remove">+</div>
             <div class="editor__block-handle"></div>
              <div>
@@ -75,10 +75,11 @@ function createBlockEditor($block){
             </div></div>';
 
         break;
+
         case 'text': 
 
             return '<div class="editor__block" data-content-block="text"> 
-             
+            <div class="editor__block-icon"><span class="ic_'.$block['type'].'" ></span> </div>
             <div class="editor__block-remove">+</div>
             <div class="editor__block-handle"></div>
              <div>
@@ -88,10 +89,30 @@ function createBlockEditor($block){
             </div></div>';
 
         break;
+
+        case 'link': 
+
+            return '<div class="editor__block" data-content-block="link"> 
+             
+                <div class="editor__block-icon"> <span class="ic_link"></span> </div>
+                <div class="editor__block-remove">+</div>
+                <div class="editor__block-handle"></div>
+                <div>
+                    <div class="editor-link">
+                        <input type="text" data-link="name" placeholder="Название ссылки" value="'.$block['name'].'"> 
+                        <input type="text" data-link="url" placeholder="Ссылка" value="'.$block['url'].'"> 
+                    </div>
+                </div>
+            </div>';
+
+        break;
+
+
+
         case 'audio': 
 
             return '<div class="editor__block" data-content-block="audio"> 
-             
+            <div class="editor__block-icon"><span class="ic_'.$block['type'].'" ></span> </div>
             <div class="editor__block-remove">+</div>
             <div class="editor__block-handle"></div>
              <div>
@@ -111,6 +132,7 @@ function createBlockEditor($block){
         case 'header': 
 
             return '<div class="editor__block" data-content-block="header"> 
+                        <div class="editor__block-icon"><span class="ic_'.$block['type'].'" ></span> </div>
                         <div class="editor__block-remove">+</div>
                         <div class="editor__block-handle"></div>
                         <div>
@@ -125,7 +147,7 @@ function createBlockEditor($block){
         case 'video': 
 
             return '<div class="editor__block" data-content-block="video"> 
-             
+            <div class="editor__block-icon"><span class="ic_'.$block['type'].'" ></span> </div>
             <div class="editor__block-remove">+</div>
             <div class="editor__block-handle"></div>
              <div>

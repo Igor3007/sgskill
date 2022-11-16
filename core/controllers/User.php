@@ -11,8 +11,13 @@ if(!$user['login']){
     exit();
 }
 
-if($user['courses']){
+if($user['courses'] && $user['access'] < 3){
     $courses = getUserCourses($user['courses']);
+}else{
+
+    //если админ до видны все курсы
+
+    $courses = getAllCourses();
 }
 
 

@@ -19,7 +19,7 @@ $lineupArray = json_decode($courseData['lineup'], true);
 если первый раз польз-ль открыл курс
 ========================================*/
 
-if(!$lessonProps){
+if(!$lessonProps && $lineupArray){
 
     //массив уроков без глав
     $clearArray = [];
@@ -53,6 +53,10 @@ foreach($allLesson as $item){
 //debug($lessonData);
 
 function getLessonStatus($lessonArray){
+
+    if($_SESSION['user']['access'] > 1) {
+        return 'active';
+    }
 
     $DATE_LINK = new DateTime($lessonArray['props']['date_start']);
     $DATE_LINK->add(new DateInterval('P7D'));

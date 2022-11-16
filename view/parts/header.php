@@ -14,8 +14,8 @@
             </nav>
           </div>
           <div class="header-top__logo">
-            <div class="header-top__logo-main"><a href="/">SG SKILS</a></div>
-            <div class="header-top__logo-sl">Photo & Video content</div>
+            <div class="header-top__logo-main"><a href="/">SO GOOD</a></div>
+            <div class="header-top__logo-sl">Skills for Life</div>
           </div>
           <div class="header-top__right">
             <nav>

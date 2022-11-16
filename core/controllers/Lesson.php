@@ -7,7 +7,7 @@ $lesson_id = $route[2][0];
 $CurrentlessonProp = getLessonProps($lesson_id, $_SESSION['user']['id']);
 
 //если набрали ссылку руками
-if(!$CurrentlessonProp['state']) {
+if(!$CurrentlessonProp['state'] && $_SESSION['user']['access'] == 1) {
     exit(header('location: /user/courses/')); 
 }
 
@@ -78,6 +78,29 @@ function parseLesson($item){
                         <div class="lesson__task">
                             '.($item['header'] ? '<div class="lesson__title">'.$item['header'].'</div>':'').'
                             '.($item['text'] ? '<div class="lesson__text">'.nl2br($item['text']).'</div>':'').'
+                        </div>
+                    </div> ';
+            
+            break;
+
+        case 'link':
+            
+            return ' <div class="lesson-box__link">
+                        <div class="lesson__link">
+                            <div class="lesson__link-icon">
+                                <span class="ic_chain" ></span>
+                            </div>
+                            <div class="lesson__link-main">
+                                <div class="lesson__link-text">'.$item['name'] .'</div>
+                                <div class="lesson__link-url">'.parse_url($item['url'])['host'].'</div>
+
+                                <div class="lesson__link-url">
+                                    <a href="'.$item['url'] .'" target="_blank" rel="noopener noreferrer">'.$item['name'] .'</a>
+                                </div>
+                            </div>
+                            
+                           
+                             
                         </div>
                     </div> ';
             

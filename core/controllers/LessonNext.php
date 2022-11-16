@@ -9,7 +9,7 @@ $CurrentlessonProp = getLessonProps($lesson_id, $_SESSION['user']['id']);
 
 //debug($CurrentlessonProp);
 
-if($CurrentlessonProp['state'] == 'completed') {
+if($CurrentlessonProp['state'] == 'completed' && $_SESSION['user']['access'] > 1) {
     exit(header('location: /user/lesson/'.$NEXT_LESSON['next']['props']['id'])); 
 }
 

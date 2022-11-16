@@ -324,6 +324,19 @@ document.addEventListener('DOMContentLoaded', function (event) {
         }
     }
 
+    class editorComponentLink {
+        constructor() {}
+
+        template() {
+            return `
+                <div class="editor-link">
+                    <input type="text"  data-link="name" placeholder="Название ссылки"> 
+                    <input type="text"  data-link="url" placeholder="Ссылка"> 
+                </div>
+            `
+        }
+    }
+
     class editorComponentFile {
         constructor() {}
 
@@ -431,6 +444,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
             const html = ` 
              
+            <div class="editor__block-icon">
+                <span class="ic_${name}" ></span>
+            </div>
             <div class="editor__block-remove">+</div>
             <div class="editor__block-handle"></div>
              `;
@@ -548,6 +564,13 @@ document.addEventListener('DOMContentLoaded', function (event) {
                                 name: item.dataset.editorBlock
                             })
                             break;
+                        case 'link':
+                            this.insertBlock({
+                                elem: new editorComponentLink().template(),
+                                type: 'string',
+                                name: item.dataset.editorBlock
+                            })
+                            break;
                     }
 
 
@@ -616,6 +639,16 @@ document.addEventListener('DOMContentLoaded', function (event) {
                             type: block.dataset.contentBlock,
                             header: block.querySelector('[data-task="header"]').value,
                             text: block.querySelector('[data-task="text"]').value,
+                        })
+
+                        break;
+
+                    case 'link':
+
+                        arrayResult.push({
+                            type: block.dataset.contentBlock,
+                            name: block.querySelector('[data-link="name"]').value,
+                            url: block.querySelector('[data-link="url"]').value,
                         })
 
                         break;

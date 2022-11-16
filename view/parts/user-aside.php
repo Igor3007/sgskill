@@ -6,6 +6,9 @@
         </picture></a></div>
     <div class="moderator-aside__name"><?=$user['name']?></div>
     <div class="moderator-aside__email"><?=$user['email']?></div>
+
+    <?=($_SESSION['user']['access'] == 3 ? '<div class="moderator-aside__cpanel"><a href="/admin/cp.php" >Панель управления</a></div>':'')?>
+
     <div class="moderator-aside__nav-head"><a href="/user/courses/">Мои курсы</a></div>
     <div class="moderator-aside__nav">
       <ul>
