@@ -382,7 +382,56 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     }
 
-    //form create lesson
+    /* ==========================================
+    send user data
+    ========================================== */
+
+    if (document.querySelector('[data-user="form"]')) {
+
+        document.querySelector('[data-user="form"]').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let form = this;
+            let formData = new FormData(this);
+            let cousresProp = [];
+
+            form.querySelectorAll('[data-course-id]').forEach(item => {
+
+                let start = item.querySelector('[data-course-date="start"]').value
+                let end = item.querySelector('[data-course-date="end"]').value
+
+                cousresProp.push({
+                    id: item.dataset.courseId,
+                    start: (start ? start : 0),
+                    end: (end ? end : 0)
+                })
+            })
+
+            formData.append('props', JSON.stringify(cousresProp))
+
+            window.ajax({
+                type: 'POST',
+                url: URL_API + form.getAttribute('action'),
+                responseType: 'json',
+                data: formData,
+                btn: form.querySelector('[type="submit"]')
+            }, function (status, response) {
+                if (response.status) {
+                    window.STATUS.msg(response.msg)
+
+                } else {
+                    window.STATUS.err(response.msg)
+                }
+            })
+
+        })
+
+    }
+
+
+    /* ==========================================
+    form create lesson
+    ========================================== */
     if (document.querySelector('[data-create-lesson]')) {
 
         document.querySelector('[data-create-lesson]').addEventListener('submit', function (e) {
@@ -663,14 +712,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
 
                     })
-
-
-
                 })
             })
-
-
-
         })
 
     }

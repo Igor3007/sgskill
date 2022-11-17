@@ -90,6 +90,25 @@ switch($route){
         require_once('controllers/EditLesson.php');
     break;
 
+    case 'blog-list': 
+        $PAGE['TEMPLATE'] = 'blog-list';
+        require_once('controllers/BlogList.php');
+    break;
+
+    case 'blog-create': 
+        $PAGE['TEMPLATE'] = 'blog-create';
+        $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
+        $PAGE['SCRIPTS'][] = '/js/editor.js';
+         
+    break;
+
+    case 'blog-edit': 
+        $PAGE['TEMPLATE'] = 'blog-edit';
+        $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
+        $PAGE['SCRIPTS'][] = '/js/editor.js';
+         
+    break;
+
     case 'rest': 
         require_once('rest.php');
     break;

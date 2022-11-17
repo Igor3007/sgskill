@@ -41,7 +41,7 @@ if(!$lessonProps && $lineupArray){
 }
 
 /* ========================================
-обеъедть лайнап с уроком
+объеденить лайнап с уроком
 ========================================*/
 
 
@@ -76,7 +76,27 @@ function getLessonStatus($lessonArray){
         }
 
     }
+
+    
 }
+
+/* =====================================
+проверить доступ курса по дате
+===================================== */
+
+$userData = getUserDataID($_SESSION['user']['id']);
+
+    $userCourseProps = [];
+
+    foreach(json_decode($userData['props'], true) as $item){ 
+        $userCourseProps[$item['id']] = $item;
+    }
+
+
+    if(!getStateAccessCourse ($userCourseProps[$course_id])){
+        exit('Курс закончился или еще не начинался');
+    }
+     
  
 
 $PAGE['h1'] = $course[0]['name'];
