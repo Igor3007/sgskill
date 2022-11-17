@@ -10,8 +10,6 @@ function mysql_update_array($table, $params, $where){
     $params_where = false;
 
     foreach($where as $key=>$value){
-
-
         if(!$params_where) {
             $params_where .='`'.$key.'`=\''.$value.'\'';  
         }else{

@@ -872,12 +872,71 @@ span[data-timer="sec"] {
     text-transform: uppercase;
 }
 
+.course-list-user__item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.course-list-user__date {
+    display: flex;
+}
+
+.course-list-user__checkbox {
+    padding-bottom: 12px;
+}
+
+.course-list-user__date input {
+    height: 40px !important;
+}
+
+.course-list-user .checkbox input:checked~.checkbox__elem {
+    background-color: #fff;
+    z-index: 2;
+    border-color: #f4b43f;
+    background-color: #f4b43f;
+}
+
+
+.sep {
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sep::before {
+    content: '';
+    width: 49%;
+    height: 1px;
+    background-color: #666;
+    display: block;
+}
+
+.card-cours__desc .set_year,
+.card-cours__desc .set_month,
+.card-cours__desc .set_day {
+    color: #555;
+    font-weight: 600;
+}
+
+.courses-block__item.courses-block__item--locked {
+    pointer-events: none;
+    filter: grayscale(1);
+}
+
 @media screen and (min-width: 767px) {
     .lesson-box__audio audio {
         max-width: 50%;
         margin: 0 auto;
         display: block;
     }
+}
+
+.user-moderator .img-table-64 {
+    border: 3px solid transparent;
+    box-shadow: 0 0 0 2px #d44277;
 }
 
 @media screen and (max-width: 768px) {

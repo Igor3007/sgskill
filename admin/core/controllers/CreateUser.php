@@ -50,6 +50,7 @@ $params = [
     'access' => $post['access'],
     'status' => $post['status'],
     'year' => $post['year'],
+    'props' => $post['props'],
 ];
 
 if(count($post['courses'])){

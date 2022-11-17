@@ -25,7 +25,7 @@
 
                  
 
-                <form action="createUser" method="POST" data-form="">
+                <form action="createUser" method="POST" data-user="form">
                   <div class="form">
                     <div class="form__item">
                       <div class="form__subitem">
@@ -101,17 +101,37 @@
                     
 
                       <? if($allCourses): ?>
+
+                        <div class="course-list-user">
+
                         <? foreach($allCourses as $item): ?>
-                          <div class="form__item">
-                            <div class="form__subitem">
+
+                          <div class="course-list-user__item" data-course-id="<?=$item['id']?>">
+                            <div class="course-list-user__checkbox">
                               <label class="checkbox">
                                 <input type="checkbox" name="courses[]" value="<?=$item['id']?>" <?=(in_array($item['id'], $userCourseId) ? 'checked':'')?> />
                                 <span class="checkbox__elem"></span>
                                 <span class="checkbox__text"><?=$item['name']?></span>
                               </label>
                             </div>
+                            <div class="course-list-user__date">
+                              <div class="course-list-user__start">
+                                <input type="text" value="<?=($userCourseProps[$item['id']]['start'] ? $userCourseProps[$item['id']]['start'] : '')?>" data-course-date="start" data class="input-material--date input-datepicker" placeholder="Дата начала">
+                              </div>  
+
+                              <div class="sep" ></div>
+
+                              <div class="course-list-user_end">
+                                <input type="text" value="<?=($userCourseProps[$item['id']]['end'] ? $userCourseProps[$item['id']]['end'] : '')?>" data-course-date="end" data class="input-material--date input-datepicker" placeholder="Дата окончания"> 
+                              </div>
+                            </div>
                           </div>
-                      <? endforeach; ?>
+
+                        <? endforeach; ?>
+
+                        </div>
+                        
+                       
 
                       <? else: ?>
                         <div>Курсы не найдены</div>
