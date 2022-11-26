@@ -47,6 +47,40 @@ switch($_POST['action']){
         
     break;
 
+    case 'removeCatig': 
+        
+        $query = mysql_remove_array([
+            'id' => $_POST['id'],
+            'table' => 'sll_blog-categories',
+        ]);
+
+        if($query['status']){
+            exit(json_encode([
+                'status' => true,
+                'msg' => 'Удалено!',
+                'reload' => true
+            ]));
+        }
+        
+    break;
+
+    case 'removePost': 
+        
+        $query = mysql_remove_array([
+            'id' => $_POST['id'],
+            'table' => 'sll_blog',
+        ]);
+
+        if($query['status']){
+            exit(json_encode([
+                'status' => true,
+                'msg' => 'Удалено!',
+                'reload' => true
+            ]));
+        }
+        
+    break;
+
 }
 
 if($query['status']){
@@ -61,5 +95,3 @@ exit(json_encode([
     'status' => false,
     'msg' => ($query['err'] ? $query['err'] : 'error: delete database'),
 ]));
-
-?>

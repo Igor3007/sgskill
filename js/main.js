@@ -16,7 +16,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
 
             this.init = function () {
-                this.changeActive(0)
+
+                if (this.$el.querySelector('.active')) {
+                    this.slideLine(this.$el.querySelector('.active'))
+                } else {
+                    this.changeActive(0)
+                }
+
+
                 this.addEvents()
             }
 
@@ -67,6 +74,22 @@ document.addEventListener('DOMContentLoaded', function (event) {
         const slideMenuInstanse = new SlideMenu();
         slideMenuInstanse.init();
 
+    }
+
+    /* =====================================
+    spoiler
+    =====================================*/
+
+    if (document.querySelector('.post-box__spoiler-btn')) {
+        document.querySelectorAll('.post-box__spoiler-btn').forEach(item => {
+            item.addEventListener('click', e => {
+
+                let elText = e.target.closest('.post-box__spoiler').querySelector('.post-box__spoiler-text')
+                elText.classList.toggle('open')
+                item.innerHTML = (elText.classList.contains('open') ? 'Свернуть' : 'Показать полностью')
+
+            })
+        })
     }
 
 

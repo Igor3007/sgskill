@@ -1,16 +1,17 @@
-<?php 
+<?php
 
-function getCurrentRoute(){
-    if(($pos = strpos($_SERVER['REQUEST_URI'], '?')) !== false){
+function getCurrentRoute()
+{
+    if (($pos = strpos($_SERVER['REQUEST_URI'], '?')) !== false) {
         $route = substr($_SERVER['REQUEST_URI'], 0, $pos);
-        }
-        $route = is_null($route) ? $_SERVER['REQUEST_URI'] : $route;
-        $route = explode('/', $route);
-        array_shift($route);
-        $result[0] = array_shift($route);
-        $result[1] = array_shift($route);
-        $result[2] = $route;
-        return $result;
+    }
+    $route = is_null($route) ? $_SERVER['REQUEST_URI'] : $route;
+    $route = explode('/', $route);
+    array_shift($route);
+    $result[0] = array_shift($route);
+    $result[1] = array_shift($route);
+    $result[2] = $route;
+    return $result;
 }
 
 $route = getCurrentRoute();
@@ -22,7 +23,7 @@ $PAGE = [
 
     'STYLES' => [
         '/styles/site.css',
-        
+
     ],
 
     'SCRIPTS' => [
@@ -36,9 +37,9 @@ $PAGE = [
     ]
 ];
 
-switch($route[0]){
+switch ($route[0]) {
 
-    case 'login': 
+    case 'login':
 
         $PAGE['TEMPLATE'] = 'login';
         $PAGE['SCRIPTS'][] = '/js/user.js';
@@ -48,12 +49,12 @@ switch($route[0]){
 
         require_once('controllers/Login.php');
 
-    break;
+        break;
 
-    case 'user': 
+    case 'user':
 
         require_once('controllers/User.php');
-        
+
 
         $PAGE['TEMPLATE'] = 'courses';
         $PAGE['LAYOUT'] = 'user-layout';
@@ -66,29 +67,29 @@ switch($route[0]){
         $PAGE['BREADCRUMBS']['/user'] = 'Личный кабинет';
         $PAGE['h1'] = 'Мои курсы';
 
-        switch($route[1]){
+        switch ($route[1]) {
             case 'courses':
                 $PAGE['BREADCRUMBS']['courses'] = 'Мои курсы';
-            break;
+                break;
 
             case 'cours':
                 $PAGE['BREADCRUMBS']['/user/courses/'] = 'Мои курсы';
                 $PAGE['TEMPLATE'] = 'cours';
 
                 require_once('controllers/Cours.php');
-            break;
+                break;
 
             case 'lesson':
                 $PAGE['BREADCRUMBS']['/user/courses/'] = 'Мои курсы';
                 $PAGE['TEMPLATE'] = 'lesson';
 
                 require_once('controllers/Lesson.php');
-            break;
+                break;
 
             case 'lesson-next':
 
                 require_once('controllers/LessonNext.php');
-            break;
+                break;
 
             case 'profile':
                 $PAGE['BREADCRUMBS']['/user/profile'] = 'Профиль';
@@ -96,57 +97,73 @@ switch($route[0]){
                 $PAGE['h1'] = 'Профиль';
 
                 require_once('controllers/Profile.php');
-            break;
+                break;
         }
 
-    break;
+        break;
 
-    case 'blog': 
-        
-        $PAGE['TEMPLATE'] = 'home';
+    case 'blog':
+
+        $PAGE['TEMPLATE'] = 'blog';
         $PAGE['SCRIPTS'][] = '/js/main.js';
+        $PAGE['STYLES'][] = '/styles/common-site.css';
 
-        switch($route[1]){
+        require_once('controllers/blog.php');
+
+        switch ($route[1]) {
             case 'article':
-                $PAGE['TEMPLATE'] = 'blog-details';
-            break;
+
+                $PAGE['TEMPLATE']  = 'blog-details';
+                $PAGE['SCRIPTS'][] = '/js/fancybox.umd.js';
+                $PAGE['STYLES'][]  = '/styles/lib/fancybox-4.css';
+
+                require_once('controllers/BlogArticle.php');
+
+                break;
+
+            case 'category':
+
+                $PAGE['TEMPLATE']  = 'blog';
+
+
+                require_once('controllers/BlogCategory.php');
+
+                break;
         }
 
-    break;
+        break;
 
-    case 'about': 
-        
+    case 'about':
+
         $PAGE['TEMPLATE'] = 'page';
         $PAGE['SCRIPTS'][] = '/js/main.js';
         $PAGE['h1'] = 'О проекте';
 
-    break;
-
-     
+        break;
 
 
 
-    case 'logout': 
+
+
+    case 'logout':
         $_SESSION['user'] = null;
         header('location: /login/');
-    break;
-
-
-  
+        break;
 
 
 
-    case 'api': 
+
+
+
+    case 'api':
         require_once('rest.php');
-    break;
+        break;
 
 
-    default: 
+    default:
 
-     $PAGE['TEMPLATE'] = 'home';
-     $PAGE['SCRIPTS'][] = '/js/main.js';
-    
+        $PAGE['TEMPLATE'] = 'blog';
+        $PAGE['SCRIPTS'][] = '/js/main.js';
 
+        require_once('controllers/blog.php');
 };
-
-?>
