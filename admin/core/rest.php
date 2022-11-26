@@ -3,33 +3,43 @@
 
 
 
-switch($_GET['method']){
+switch ($_GET['method']) {
 
-    case 'createUser': 
+    case 'createUser':
         require_once('controllers/CreateUser.php');
-    break;
-    
-    case 'createCourse': 
+        break;
+
+    case 'createCourse':
         require_once('controllers/CreateCourse.php');
-    break;
+        break;
 
-    case 'createLesson': 
+    case 'createLesson':
         require_once('controllers/CreateLesson.php');
-    break;
+        break;
 
-    case 'uploadEditor': 
+    case 'uploadEditor':
         require_once('controllers/UploadEditor.php');
-    break;
+        break;
 
-    case 'remove': 
+    case 'remove':
         require_once('controllers/Remove.php');
-    break;
+        break;
 
-    case 'getLessons': 
+    case 'getLessons':
         require_once('controllers/_popupGetLessons.php');
-    break;
-    
-     
+        break;
+
+    case 'formCatigBlog':
+        require_once('controllers/_popupformCatigBlog.php');
+        break;
+
+    case 'formCatigSave':
+        require_once('controllers/BlogCategoriesCreate.php');
+        break;
+
+    case 'createPost':
+        require_once('controllers/CreatePost.php');
+        break;
 }
 
 

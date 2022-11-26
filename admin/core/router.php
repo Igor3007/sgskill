@@ -97,8 +97,11 @@ switch($route){
 
     case 'blog-create': 
         $PAGE['TEMPLATE'] = 'blog-create';
+
         $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
         $PAGE['SCRIPTS'][] = '/js/editor.js';
+
+        require_once('controllers/CreateBlog.php');
          
     break;
 
@@ -106,7 +109,14 @@ switch($route){
         $PAGE['TEMPLATE'] = 'blog-edit';
         $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
         $PAGE['SCRIPTS'][] = '/js/editor.js';
+
+        require_once('controllers/EditPost.php');
          
+    break;
+
+    case 'blog-categories': 
+        $PAGE['TEMPLATE'] = 'blog-categories';
+        require_once('controllers/BlogCategories.php');
     break;
 
     case 'rest': 
@@ -120,5 +130,3 @@ switch($route){
     
 
 };
-
-?>

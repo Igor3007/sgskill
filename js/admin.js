@@ -361,6 +361,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
             let form = this;
             let formData = new FormData(this);
 
+            //данные из редактора
+            if (e.target.dataset.form == 'content' && window.editorInstanse) {
+                formData.append('content', window.editorInstanse.getResulsJson())
+            }
+
             console.log(formData)
 
             window.ajax({
@@ -463,6 +468,61 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     }
 
+
+
+    /* ==========================================
+    create category blog
+    ========================================== */
+    if (document.querySelector('[data-popup-blog-catig]')) {
+
+        document.querySelectorAll('[data-popup-blog-catig]').forEach(item => {
+            item.addEventListener('click', function (event) {
+
+
+                let popup = new customModal()
+                let url = URL_API + 'formCatigBlog';
+
+                let data = new FormData();
+
+                data.append('id', event.target.dataset.popupBlogCatig)
+
+
+                popup.open('<div>Loading...</div>', function (instanse) {
+
+                    window.ajax({
+                        type: 'POST',
+                        data,
+                        url: url,
+                    }, function (status, response) {
+
+                        popup.changeContent(response)
+                        popup.modal.querySelector('form').addEventListener('submit', function (e) {
+
+                            e.preventDefault()
+                            let dataSend = new FormData(this);
+
+                            window.ajax({
+                                type: 'POST',
+                                data: dataSend,
+                                responseType: 'json',
+                                url: URL_API + 'formCatigSave',
+                            }, function (status, response) {
+                                window.STATUS.msg(response.msg)
+                                window.location.reload()
+                                popup.close()
+                            })
+
+                        })
+
+
+                    })
+                })
+            })
+
+        })
+
+    }
+
     //form edit course
     if (document.querySelector('[data-edit-course]')) {
 
@@ -499,37 +559,45 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     if (document.querySelector('[data-remove]')) {
 
-        let elem = document.querySelector('[data-remove]');
-        let data = new FormData();
+        document.querySelectorAll('[data-remove]').forEach(item => {
 
-        elem.addEventListener('click', function () {
 
-            if (!confirm('Вы действительно хотите удалить ?')) return false;
 
-            data.append('action', elem.dataset.remove)
-            data.append('id', elem.dataset.removeId)
 
-            window.ajax({
-                type: 'POST',
-                url: URL_API + 'remove',
-                responseType: 'json',
-                data,
-                btn: false,
+            item.addEventListener('click', function () {
 
-            }, function (status, response) {
-                if (response.status) {
-                    window.STATUS.msg(response.msg)
+                let data = new FormData();
+                let elem = item;
 
-                    if (response.reload) {
-                        window.location.reload()
+                if (!confirm('Вы действительно хотите удалить ?')) return false;
+
+                data.append('action', elem.dataset.remove)
+                data.append('id', elem.dataset.removeId)
+
+                window.ajax({
+                    type: 'POST',
+                    url: URL_API + 'remove',
+                    responseType: 'json',
+                    data,
+                    btn: false,
+
+                }, function (status, response) {
+                    if (response.status) {
+                        window.STATUS.msg(response.msg)
+
+                        if (response.reload) {
+                            window.location.reload()
+                        }
+
+                    } else {
+                        window.STATUS.err(response.msg)
                     }
+                })
 
-                } else {
-                    window.STATUS.err(response.msg)
-                }
             })
-
         })
+
+
 
     }
 

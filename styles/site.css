@@ -2127,7 +2127,7 @@ input[type="date"] {
 }
 
 :root {
-  --fancybox-accent-color: #BF3232;
+  --fancybox-accent-color: #f7bb17;
   --carousel-button-width: 48px;
   --carousel-button-height: 48px;
   --carousel-button-svg-width: 27px;
