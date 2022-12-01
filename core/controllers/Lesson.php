@@ -140,7 +140,7 @@ function parseLesson($item){
 
             foreach ($item['image'] as $img){
                 $gallery .= '<div class="lesson-box__item">
-                                <a href="http://">
+                                <a data-fancybox="lesson" href="'.$img['url'].'">
                                     <picture> <img src="'.$img['url'].'" alt="" srcset=""> </picture>
                                 </a>
                             </div>';
@@ -163,5 +163,3 @@ function parseLesson($item){
 
 $PAGE['h1'] = $lesson['name'];
 $PAGE['BREADCRUMBS']['/user/cours/'.$lesson['course_id']] = $lesson['name'];
-
-?>

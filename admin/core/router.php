@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/core/app.php'); 
+require_once($_SERVER['DOCUMENT_ROOT'] . '/core/app.php');
 
 $route = $_GET['view'];
 
@@ -12,7 +12,7 @@ $PAGE = [
     'STYLES' => [
         '/styles/admin.css',
         '/styles/common.css',
-        
+
     ],
 
     'SCRIPTS' => [
@@ -27,106 +27,129 @@ $PAGE = [
     ]
 ];
 
-switch($route){
+switch ($route) {
 
-    case 'auth': 
+    case 'auth':
 
         $PAGE['TEMPLATE'] = 'login';
         $PAGE['STYLES'] = [
             '/styles/main.css'
         ];
 
-    break;
+        break;
 
-    case 'user-create': 
+    case 'user-create':
         $PAGE['TEMPLATE'] = 'user-create';
         require_once('controllers/UserAdd.php');
-    break;
+        break;
 
-    case 'user-list': 
+    case 'user-list':
         $PAGE['TEMPLATE'] = 'user-list';
         require_once('controllers/UserList.php');
-    break;
+        break;
 
-    case 'user-edit': 
+    case 'user-edit':
         $PAGE['TEMPLATE'] = 'user-edit';
         require_once('controllers/EditUser.php');
-    break;
+        break;
 
-    case 'course-list': 
+    case 'course-list':
         $PAGE['TEMPLATE'] = 'course-list';
         require_once('controllers/CourseList.php');
-    break;
+        break;
 
-    case 'course-edit': 
+    case 'course-edit':
         $PAGE['TEMPLATE'] = 'course-edit';
         $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
-        
+
         require_once('controllers/EditCourse.php');
-    break;
-    
-    case 'course-create': 
+        break;
+
+    case 'course-create':
         $PAGE['TEMPLATE'] = 'course-create';
         $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
         //require_once('controllers/CourseList.php');
-    break;
+        break;
 
-    case 'lesson-list': 
+    case 'lesson-list':
         $PAGE['TEMPLATE'] = 'lesson-list';
         require_once('controllers/LessonList.php');
-    break;
+        break;
 
-    case 'lesson-create': 
+    case 'lesson-create':
         $PAGE['TEMPLATE'] = 'lesson-create';
         $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
         $PAGE['SCRIPTS'][] = '/js/editor.js';
         require_once('controllers/CourseList.php');
-    break;
+        break;
 
-    case 'lesson-edit': 
+    case 'lesson-edit':
         $PAGE['TEMPLATE'] = 'lesson-edit';
         $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
         $PAGE['SCRIPTS'][] = '/js/editor.js';
         require_once('controllers/EditLesson.php');
-    break;
+        break;
 
-    case 'blog-list': 
+    case 'blog-list':
         $PAGE['TEMPLATE'] = 'blog-list';
         require_once('controllers/BlogList.php');
-    break;
+        break;
 
-    case 'blog-create': 
+    case 'blog-create':
         $PAGE['TEMPLATE'] = 'blog-create';
 
         $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
         $PAGE['SCRIPTS'][] = '/js/editor.js';
 
         require_once('controllers/CreateBlog.php');
-         
-    break;
 
-    case 'blog-edit': 
+        break;
+
+    case 'blog-edit':
         $PAGE['TEMPLATE'] = 'blog-edit';
         $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
         $PAGE['SCRIPTS'][] = '/js/editor.js';
 
         require_once('controllers/EditPost.php');
-         
-    break;
 
-    case 'blog-categories': 
+        break;
+
+    case 'blog-categories':
         $PAGE['TEMPLATE'] = 'blog-categories';
         require_once('controllers/BlogCategories.php');
-    break;
+        break;
 
-    case 'rest': 
+    case 'pages-list':
+        $PAGE['TEMPLATE'] = 'page-list';
+        require_once('controllers/PageList.php');
+        break;
+
+    case 'page-create':
+        $PAGE['TEMPLATE'] = 'page-create';
+        $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
+        $PAGE['SCRIPTS'][] = '/js/editor.js';
+
+        break;
+
+    case 'page-edit':
+        $PAGE['TEMPLATE'] = 'page-edit';
+        require_once('controllers/EditPage.php');
+        $PAGE['SCRIPTS'][] = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
+        $PAGE['SCRIPTS'][] = '/js/editor.js';
+
+        break;
+
+    case 'config':
+        $PAGE['TEMPLATE'] = 'config';
+        require_once('controllers/Config.php');
+        break;
+
+    case 'rest':
         require_once('rest.php');
-    break;
-    
+        break;
 
-    default: 
 
-    $PAGE['TEMPLATE'] = 'home';
-    
+    default:
 
+        $PAGE['TEMPLATE'] = 'home';
 };

@@ -41,6 +41,7 @@
 
 
 
+
                     </div>
                   </div>
                 </div>
@@ -108,7 +109,7 @@
 
                 <div class="form__item">
                   <div class="form__subitem">
-                    <input type="text" name="seo_keywords" placeholder="description" value="<?= $data['seo_keywords'] ?>">
+                    <input type="text" name="seo_keywords" placeholder="keywords" value="<?= $data['seo_keywords'] ?>">
                   </div>
                 </div>
 

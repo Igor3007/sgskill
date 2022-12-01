@@ -3504,7 +3504,7 @@ footer {
 
 .footer__copy {
   text-align: center;
-  padding-bottom: 10px;
+  padding-bottom: 0;
 }
 
 .footer__social ul {
@@ -6262,9 +6262,10 @@ section.section-blog {
   border-radius: 50%;
 }
 
+/* 
 .blog-post__image:hover img {
   filter: blur(4px);
-}
+} */
 
 .blog-post__image:hover a {
   transform: scale(1);

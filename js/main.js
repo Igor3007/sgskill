@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
                 if (this.$el.querySelector('.active')) {
                     this.slideLine(this.$el.querySelector('.active'))
+                    this.scrollElement(this.$el, this.$el.querySelector('.active'))
                 } else {
                     this.changeActive(0)
                 }
@@ -36,6 +37,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
                         li.classList.add('active')
                         this.slideLine(li)
 
+
+
                     } else {
                         if (li.classList.contains('active')) li.classList.remove('active')
                     }
@@ -44,12 +47,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
             }
 
             this.slideLine = function (li) {
-                console.log(li)
+
 
                 li = li.querySelector('a')
 
                 this.line.style.left = li.offsetLeft + 'px'
                 this.line.style.width = li.clientWidth + 'px'
+
+
 
             }
 
@@ -67,6 +72,30 @@ document.addEventListener('DOMContentLoaded', function (event) {
                 window.addEventListener('resize', (e) => {
                     this.slideLine(this.$el.querySelector('.active'))
                 })
+            }
+
+            this.scrollElement = function (container, elem) {
+
+                var rect = elem.getBoundingClientRect();
+                var rectContainer = container.getBoundingClientRect();
+
+                let elemOffset = {
+                    top: rect.top + document.body.scrollTop,
+                    left: rect.left + document.body.scrollLeft
+                }
+
+                let containerOffset = {
+                    top: rectContainer.top + document.body.scrollTop,
+                    left: rectContainer.left + document.body.scrollLeft
+                }
+
+                let leftPX = elemOffset.left - containerOffset.left + container.scrollLeft - (container.offsetWidth / 2) + (elem.offsetWidth / 2)
+
+                container.scrollTo({
+                    left: leftPX,
+                    behavior: 'smooth'
+                });
+
             }
 
         }

@@ -4,12 +4,9 @@
       <div class="blog">
         <div class="blog__nav">
           <ul class="slide-menu">
-            <li class="<?= ('all' == $id_cat ? 'active' : '') ?>"><a href="/blog/new/">Новые</a></li>
-
-            <? foreach ($allCategories as $cat) : ?>
-              <li class="<?= ($cat['id'] == $id_cat ? 'active' : '') ?>"><a href="/blog/category/<?= $cat['id'] ?>"><?= $cat['name'] ?></a></li>
-            <? endforeach; ?>
-
+            <li class="active">
+              <a href="/blog/tag/">#<?= $tagID ?></a>
+            </li>
             <li class="sliding-line"></li>
           </ul>
         </div>
@@ -24,7 +21,6 @@
                   <div class="blog-post__image">
 
                     <picture>
-
                       <img src="<?= getMediaURL($item['image'])['orig'] ?>" loading="lazy" alt="image" />
                     </picture>
 
@@ -38,10 +34,9 @@
                       <ul>
 
                         <? foreach (explode(',', $item['tags']) as $tag) : ?>
-
                           <li><a href="/blog/tag/<?= substr(trim($tag), 1) ?>"><?= $tag ?></a></li>
-
                         <? endforeach; ?>
+
                       </ul>
                     </div>
                     <div class="blog-post__title"><a href="/blog/article/<?= $item['alias'] ?>"><?= $item['title'] ?></a></div>

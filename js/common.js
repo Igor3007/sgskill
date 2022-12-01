@@ -4,6 +4,30 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
     /* ==============================================
+    change default fancubox
+    ============================================== */
+
+    if (window.Fancybox != undefined) {
+        Fancybox.bind("[data-fancybox]", {
+            infinite: false,
+            Thumbs: {
+                autoStart: false,
+            },
+            Toolbar: {
+                display: [
+                    //"zoom",
+                    //"slideshow",
+                    "fullscreen",
+                    "download",
+                    //"thumbs",
+                    "close",
+                ],
+            },
+        });
+    }
+
+
+    /* ==============================================
     mobile menu
     ============================================== */
 

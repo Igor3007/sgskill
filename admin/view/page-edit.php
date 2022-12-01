@@ -13,93 +13,59 @@
         </div>
         <div class="page-moderator__content">
 
+          <div class="page-moderator__topbar">
+            <ul>
+              <li><a data-remove="removePage" data-remove-id="<?= $data['id'] ?>">Удалить страницу</a></li>
+              <li><a href="/page/<?= $data['alias'] ?>" target="_blank">Посмотреть на сайте</a></li>
+            </ul>
+          </div>
+
           <div class="page-moderator__main">
-            <div class="page-moderator__h1">Добавить пост</div>
-            <form action="createPost" method="POST" data-form="content">
+            <div class="page-moderator__h1">Редактировать страницу</div>
+            <form action="createPage" method="POST" data-form="content">
               <div class="form">
-                <div class="form__item">
-                  <div class="form__subitem">
-                    <div class="form-image">
-
-                      <div class="form-image__cover  active" data-image-upload="form">
-                        <div class="form-image__btn">
-                          <label class="attach-label"><span class="bgimage lazyload" data-bg="/img/common/camera.png"></span><span class="text-upload">Выбрать файл</span>
-                            <input type="file" name="image" data-attach="poster">
-                          </label>
-                        </div>
-                        <div class="form-image__image ">
-                          <picture><img src="" data-attach="preview-poster"></picture>
-                        </div>
-                      </div>
-
-
-
-                    </div>
-                  </div>
-                </div>
 
                 <div class="form__label">Информация</div>
 
                 <div class="form__item">
                   <div class="form__subitem">
-                    <input type="text" name="title" placeholder="Загловок">
-                  </div>
-                </div>
-
-                <div class="form__item">
-                  <div class="form__subitem">
-                    <select name="category" placeholder="Категория" id="">
-                      <?= activeSelect($arraySelect, '') ?>
-                    </select>
+                    <input type="text" name="title" placeholder="Загловок" value="<?= $data['title'] ?>">
                   </div>
                   <div class="form__subitem">
                     <select name="status" placeholder="Статус" id="">
                       <?= activeSelect([
                         '1' => 'Разблокирован',
                         '0' => 'Заблокирован',
-                      ], 1) ?>
+                      ], $data['status']) ?>
                     </select>
                   </div>
-                  <div class="form__subitem">
-                    <input type="text" class="input-material--date input-datepicker" data-datepicker-lang="ru" name="date_create" placeholder="Дата">
-                  </div>
                 </div>
-
-
-
-                <div class="form__label">Краткое описание</div>
-
                 <div class="form__item">
                   <div class="form__subitem">
-                    <textarea name="pretext" id="" cols="30" rows="2" placeholder="Описание"></textarea>
+                    <input type="text" name="alias" placeholder="Алиас" value="<?= $data['alias'] ?>">
                   </div>
+
                 </div>
 
-                <div class="form__label">Хеш теги</div>
 
-                <div class="form__item">
-                  <div class="form__subitem">
-                    <textarea name="tags" id="" cols="30" rows="2" placeholder="Теги через запятую"></textarea>
-                  </div>
-                </div>
 
                 <div class="form__label">SEO</div>
 
                 <div class="form__item">
                   <div class="form__subitem">
-                    <input type="text" name="seo_title" placeholder="title">
+                    <input type="text" name="seo_title" placeholder="title" value="<?= $data['seo_title'] ?>">
                   </div>
                 </div>
 
                 <div class="form__item">
                   <div class="form__subitem">
-                    <input type="text" name="seo_desc" placeholder="description">
+                    <input type="text" name="seo_desc" placeholder="description" value="<?= $data['seo_desc'] ?>">
                   </div>
                 </div>
 
                 <div class="form__item">
                   <div class="form__subitem">
-                    <input type="text" name="seo_keywords" placeholder="keywords">
+                    <input type="text" name="seo_keywords" placeholder="keywords" value="<?= $data['seo_keywords'] ?>">
                   </div>
                 </div>
 
@@ -125,9 +91,20 @@
                       </div>
                       <div class="editor__content">
 
-                        <div class="editor__empty">
-                          Выбирайте нужные блоки в левой части редактора и создайте ваш пост!
-                        </div>
+                        <? if ($data['content']) : ?>
+
+                          <? foreach (json_decode($data['content'], true) as $block) : ?>
+                            <?= createBlockEditor($block) ?>
+                          <? endforeach; ?>
+
+                        <? else : ?>
+
+                          <div class="editor__empty" style="display: none">
+                            Выбирайте нужные блоки в левой части редактора и создайте ваш пост!
+                          </div>
+
+                        <? endif; ?>
+
 
                       </div>
                     </div>
@@ -140,6 +117,7 @@
 
                 <div class="form__item">
                   <div class="form__subitem">
+                    <input type="hidden" name="post_id" value="<?= $data['id'] ?>">
                     <button class="btn btn-full">Сохранить</button>
                   </div>
                   <div class="form__subitem"></div>
