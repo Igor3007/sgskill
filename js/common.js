@@ -246,7 +246,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
 
             this.close = function () {
-                this.container.classList.remove('open')
+                if(this.container){
+                    this.container.classList.remove('open')
+                }
                 this.btn.classList.remove('open')
                 document.body.classList.remove('hidden-profile')
 

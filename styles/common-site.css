@@ -398,6 +398,8 @@
 
 @media screen and (max-width: 575px) {
 
+
+
     .sliding-line {
         top: calc(100% - 10px);
     }
@@ -467,6 +469,11 @@
 }
 
 @media screen and (max-width: 992px) {
+
+    .header-top__logo {
+        margin-left: 10px;
+        margin-top: 0px;
+    }
 
     .header-top__user.header-top__user--main {
         margin-left: auto;
