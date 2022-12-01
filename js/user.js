@@ -212,17 +212,36 @@ document.addEventListener("DOMContentLoaded", function (event) {
         document.querySelectorAll('.video').forEach(item => {
             item.addEventListener('click', e => {
 
-                let id = item.dataset.id.split('/')
+                let url = item.dataset.id
+                let containerWidth = item.clientWidth
+                let containerHeight = (item.clientHeight)
+                let id = url.replace(/\D+/g, "")
 
-                let iframe = document.createElement('iframe');
-                iframe.setAttribute('src', 'https://kinescope.io/embed/' + id[id.length - 1] + '?autoplay=1')
-                iframe.setAttribute('width', item.clientWidth + 'px')
-                iframe.setAttribute('height', (item.clientHeight) + 'px')
-                iframe.setAttribute('allowfullscreen', 'true')
-                iframe.classList.add('play')
+                let player = document.createElement('iframe');
+                player.id = 'video_' + id
+                player.classList.add('play')
 
                 item.innerHTML = '';
-                item.append(iframe);
+                item.append(player);
+
+
+                Kinescope.IframePlayer.create(player.id, {
+                        url: url,
+                        size: {
+                            width: containerWidth,
+                            height: containerHeight
+                        },
+                        behaviour: {
+                            autoPlay: true
+                        }
+                    })
+                    .then(function (player) {
+                        player.once(player.Events.Ready, function (event) {
+                            event.target.setVolume(0.5);
+                            player.play();
+                        })
+
+                    });
 
             })
         })

@@ -67,9 +67,13 @@ switch ($route[0]) {
             '/styles/main.css',
             '/styles/common.css'
         ];
-        $PAGE['SCRIPTS'][] = '/js/user.js';
 
+
+        $PAGE['SCRIPTS'][] = '/js/user.js';
         $PAGE['SCRIPTS'][] = '/js/fancybox.umd.js';
+        $PAGE['SCRIPTS'][] = 'https://player.kinescope.io/latest/iframe.player.js';
+
+
         $PAGE['STYLES'][]  = '/styles/lib/fancybox-4.css';
 
 

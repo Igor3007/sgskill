@@ -960,6 +960,10 @@ span[data-timer="sec"] {
     height: 45px;
 }
 
+.video iframe {
+    margin-bottom: -6px;
+}
+
 
 
 @media screen and (min-width: 767px) {
