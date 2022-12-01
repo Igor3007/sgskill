@@ -14,29 +14,10 @@
         <div class="page-moderator__content">
 
           <div class="page-moderator__main">
-            <div class="page-moderator__h1">Добавить пост</div>
-            <form action="createPost" method="POST" data-form="content">
+            <div class="page-moderator__h1">Добавить страницу</div>
+            <form action="createPage" method="POST" data-form="content">
               <div class="form">
-                <div class="form__item">
-                  <div class="form__subitem">
-                    <div class="form-image">
 
-                      <div class="form-image__cover  active" data-image-upload="form">
-                        <div class="form-image__btn">
-                          <label class="attach-label"><span class="bgimage lazyload" data-bg="/img/common/camera.png"></span><span class="text-upload">Выбрать файл</span>
-                            <input type="file" name="image" data-attach="poster">
-                          </label>
-                        </div>
-                        <div class="form-image__image ">
-                          <picture><img src="" data-attach="preview-poster"></picture>
-                        </div>
-                      </div>
-
-
-
-                    </div>
-                  </div>
-                </div>
 
                 <div class="form__label">Информация</div>
 
@@ -44,14 +25,7 @@
                   <div class="form__subitem">
                     <input type="text" name="title" placeholder="Загловок">
                   </div>
-                </div>
 
-                <div class="form__item">
-                  <div class="form__subitem">
-                    <select name="category" placeholder="Категория" id="">
-                      <?= activeSelect($arraySelect, '') ?>
-                    </select>
-                  </div>
                   <div class="form__subitem">
                     <select name="status" placeholder="Статус" id="">
                       <?= activeSelect([
@@ -60,28 +34,9 @@
                       ], 1) ?>
                     </select>
                   </div>
-                  <div class="form__subitem">
-                    <input type="text" class="input-material--date input-datepicker" data-datepicker-lang="ru" name="date_create" placeholder="Дата">
-                  </div>
                 </div>
 
 
-
-                <div class="form__label">Краткое описание</div>
-
-                <div class="form__item">
-                  <div class="form__subitem">
-                    <textarea name="pretext" id="" cols="30" rows="2" placeholder="Описание"></textarea>
-                  </div>
-                </div>
-
-                <div class="form__label">Хеш теги</div>
-
-                <div class="form__item">
-                  <div class="form__subitem">
-                    <textarea name="tags" id="" cols="30" rows="2" placeholder="Теги через запятую"></textarea>
-                  </div>
-                </div>
 
                 <div class="form__label">SEO</div>
 

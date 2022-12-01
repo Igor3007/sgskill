@@ -3432,8 +3432,8 @@ header.header--login .header-top__logo-sl {
 }
 
 header.header--login .header-top__logo-sl {
-  font-size: 12px;
-  letter-spacing: 2.5px;
+  font-size: 14px;
+  letter-spacing: 3.5px;
 }
 
 .header-top {
@@ -7573,8 +7573,8 @@ div[data-lang]:not(.active) {
   }
 
   header.header--login .header-top__logo-main {
-    font-size: 40px;
-    line-height: 40px;
+    font-size: 33px;
+    line-height: 33px;
   }
 
   .courses-block__item {
@@ -7818,7 +7818,7 @@ div[data-lang]:not(.active) {
 
   .card-cours {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .card-cours__image {
@@ -7879,7 +7879,8 @@ div[data-lang]:not(.active) {
 
   .card-lesson__title a {
     text-align: left;
-    font-size: 22px;
+    font-size: 19px;
+    font-weight: 500;
   }
 
   .card-lesson__main {

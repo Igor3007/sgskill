@@ -1,9 +1,9 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/inc/config.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/core/db.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/inc/config.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/core/db.php');
 
-if(!$_POST['id']){
+if (!$_POST['id']) {
     exit(json_encode([
         'status' => false,
         'msg' => 'error: not id for remove',
@@ -11,79 +11,95 @@ if(!$_POST['id']){
 }
 
 
-switch($_POST['action']){
+switch ($_POST['action']) {
 
-    case 'removeLesson': 
-        
+    case 'removeLesson':
+
         $query = mysql_remove_array([
             'id' => $_POST['id'],
             'table' => 'sll_lesson',
         ]);
 
-        if($query['status']){
+        if ($query['status']) {
             exit(json_encode([
                 'status' => true,
                 'msg' => 'Удалено!',
                 'reload' => true
             ]));
         }
-        
-    break;
 
-    case 'removeCourse': 
-        
+        break;
+
+    case 'removeCourse':
+
         $query = mysql_remove_array([
             'id' => $_POST['id'],
             'table' => 'sll_courses',
         ]);
 
-        if($query['status']){
+        if ($query['status']) {
             exit(json_encode([
                 'status' => true,
                 'msg' => 'Удалено!',
                 'reload' => true
             ]));
         }
-        
-    break;
 
-    case 'removeCatig': 
-        
+        break;
+
+    case 'removeCatig':
+
         $query = mysql_remove_array([
             'id' => $_POST['id'],
             'table' => 'sll_blog-categories',
         ]);
 
-        if($query['status']){
+        if ($query['status']) {
             exit(json_encode([
                 'status' => true,
                 'msg' => 'Удалено!',
                 'reload' => true
             ]));
         }
-        
-    break;
 
-    case 'removePost': 
-        
+        break;
+
+    case 'removePost':
+
         $query = mysql_remove_array([
             'id' => $_POST['id'],
             'table' => 'sll_blog',
         ]);
 
-        if($query['status']){
+        if ($query['status']) {
             exit(json_encode([
                 'status' => true,
                 'msg' => 'Удалено!',
                 'reload' => true
             ]));
         }
-        
-    break;
 
+        break;
+
+    case 'removePage':
+
+        $query = mysql_remove_array([
+            'id' => $_POST['id'],
+            'table' => 'sll_pages',
+        ]);
+
+        if ($query['status']) {
+            exit(json_encode([
+                'status' => true,
+                'msg' => 'Удалено!',
+                'reload' => true
+            ]));
+        }
+
+        break;
 }
 
-if($query['status']){
+if ($query['status']) {
     exit(json_encode([
         'status' => true,
         'msg' => 'Удалено!',

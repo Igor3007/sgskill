@@ -2,17 +2,19 @@
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/core/models/blog.php');
 
-$id_cat = htmlspecialchars($route[2][0]);
+$tagID = urldecode($route[2][0]);
 $page = urldecode($route[2][2]);
+
+$PAGE['SEO_TITLE'] = '#' . $tagID . ' - Посты - sg-skill';
 
 
 
 $query = getListArticle(
     array(
-        'link' => 'category/' . $id_cat . '/',
+        'link' => 'tag/' . $tagID . '/',
         'page' => $page,
         'count' => 5,
-        'where' => "category = '$id_cat' AND status = 1"
+        'where' => "tags LIKE '%$tagID%'"
     )
 );
 

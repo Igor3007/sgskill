@@ -2,7 +2,10 @@
 
 session_start();
 
-function is_user(){
+$SETTING = unserialize(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/core/setting.php'));
+
+function is_user()
+{
     return array(
         'name' => $_SESSION['user']['name'],
         'country' => $_SESSION['user']['country'],
@@ -15,9 +18,10 @@ function is_user(){
     );
 }
 
-function uploadFile($setting){
+function uploadFile($setting)
+{
 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/core/models/media.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/core/models/media.php');
 
     $default = [
         'file' => false,
@@ -27,7 +31,7 @@ function uploadFile($setting){
 
     $params = array_replace($default, $setting);
 
-    if(!$params['file']){
+    if (!$params['file']) {
         exit(json_encode([
             'status' => false,
             'msg' => 'Отсуствует файл',
@@ -35,18 +39,18 @@ function uploadFile($setting){
     }
 
 
-    switch($params['type']){
+    switch ($params['type']) {
 
-        case 'image' : 
+        case 'image':
 
-            if($params['file']['type'] != 'image/jpeg' && $params['file']['type'] != 'image/png'){
+            if ($params['file']['type'] != 'image/jpeg' && $params['file']['type'] != 'image/png') {
                 exit(json_encode([
                     'status' => false,
                     'msg' => 'Допустимы только jpg/png файлы',
                 ]));
             }
 
-            if($params['file']['size'] > 1000000){
+            if ($params['file']['size'] > 1000000) {
                 exit(json_encode([
                     'status' => false,
                     'msg' => 'Размер файла должен быть не более 1MB',
@@ -55,9 +59,9 @@ function uploadFile($setting){
 
             break;
 
-        case 'files' : 
+        case 'files':
 
-            if($params['file']['size'] > 100000000){ 
+            if ($params['file']['size'] > 100000000) {
                 exit(json_encode([
                     'status' => false,
                     'msg' => 'Размер файла должен быть не более 5MB',
@@ -65,10 +69,9 @@ function uploadFile($setting){
             }
 
             break;
-
     }
 
-    
+
 
     $extends = [
         'jpg' => 'jpg',
@@ -90,79 +93,77 @@ function uploadFile($setting){
         'rar' => 'rar',
     ];
 
-    
+
 
     $nameFile = explode('.', basename($params['file']['name']));
 
-    if(!$extends[$nameFile[1]]){
+    if (!$extends[$nameFile[1]]) {
         exit(json_encode([
             'status' => false,
             'msg' => 'Не поддерживаемый формат файла',
         ]));
     }
 
-    $nameFile = md5($nameFile[0].time()).'.'.$extends[$nameFile[1]];
-
-   
+    $nameFile = md5($nameFile[0] . time()) . '.' . $extends[$nameFile[1]];
 
 
-    if(move_uploaded_file($params['file']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].$params['path'].$nameFile)){
-        
+
+
+    if (move_uploaded_file($params['file']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $params['path'] . $nameFile)) {
+
         $insertFile = setMediaFile([
-            'orig' => $params['path'].$nameFile
+            'orig' => $params['path'] . $nameFile
         ]);
 
-        if($insertFile['status']) {
+        if ($insertFile['status']) {
             return [
                 'status' => true,
                 'id' => $insertFile['id'],
-                'orig' => $params['path'].$nameFile
+                'orig' => $params['path'] . $nameFile
             ];
-        }else{
-            return [ 'status' => false, 'msg' => 'Ошибка записи файла в базу'];
+        } else {
+            return ['status' => false, 'msg' => 'Ошибка записи файла в базу'];
         }
-
-    }else{
+    } else {
         exit(json_encode([
             'status' => false,
             'msg' => 'А нихуяя',
         ]));
     }
-
-    
-
 }
 
-function getMediaURL($ids){
+function getMediaURL($ids)
+{
 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/core/models/media.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/core/models/media.php');
     return getMediaData($ids);
 }
 
-function saltPassword($pass) {
+function saltPassword($pass)
+{
     $salt = '@$%^*(*&*&^%%^jhdwiehdwIOJHIUDHiuywhdqhd';
-    return md5($pass.$salt);
+    return md5($pass . $salt);
 }
 
-function activeSelect($array, $active){
+function activeSelect($array, $active)
+{
 
-    foreach($array as $key => $value){
-        echo '<option '.($key == $active ? 'selected="selected"':'' ).' value="'.$key.'" >'.$value.'</option>';
+    foreach ($array as $key => $value) {
+        echo '<option ' . ($key == $active ? 'selected="selected"' : '') . ' value="' . $key . '" >' . $value . '</option>';
     }
-
 }
 
-function debug($arr) {
+function debug($arr)
+{
 
     echo '<pre>';
     print_r($arr);
     echo '</pre>';
-
-     
 }
 
-function setDates($date, $set){
-    
+function setDates($date, $set)
+{
+
     $month = array(
         '01' => 'Января',
         '02' => 'Февраля',
@@ -176,8 +177,8 @@ function setDates($date, $set){
         '10' => 'Октября',
         '11' => 'Ноября',
         '12' => 'Декабря'
-            );
-    
+    );
+
     $weekday = array(
         1 => 'Понедельник',
         2 => 'Вторник',
@@ -188,21 +189,20 @@ function setDates($date, $set){
         7 => 'Воскресенье'
     );
     $arrDates = explode(' ', $date);
-    $date = explode('-', $arrDates[0]); 
-    $time = explode(':', $arrDates[1]); 
+    $date = explode('-', $arrDates[0]);
+    $time = explode(':', $arrDates[1]);
 
     $return = '';
-    
-    if($set[0]){
-        $return .= '<span class="set_day">'.$date[2].'</span> <span class="set_month">'.$month[$date[1]].'</span> <span class="set_year">'.$date[0].'</span>'; 
+
+    if ($set[0]) {
+        $return .= '<span class="set_day">' . $date[2] . '</span> <span class="set_month">' . $month[$date[1]] . '</span> <span class="set_year">' . $date[0] . '</span>';
     }
-    
-    if($set[1]){
-        $return .= '<span class="set_week">'.$weekday[date("w", mktime(0, 0, 0, $date[1], $date[2], $date[0]))].'</span>';
+
+    if ($set[1]) {
+        $return .= '<span class="set_week">' . $weekday[date("w", mktime(0, 0, 0, $date[1], $date[2], $date[0]))] . '</span>';
     }
-    
+
     return  $return;
-    
 }
 
 $country = [
@@ -217,13 +217,13 @@ $sex = [
     '2' => 'Женский'
 ];
 
+$status = [
+    '1' => 'Разблокирован',
+    '0' => '<span style="color:red" >Заблокирован</span>'
+];
+
 $access = [
     '1' => 'Пользователь',
     '2' => 'Модератор',
     '3' => 'Администратор',
-  ];
-
- 
-
-
-?>
+];

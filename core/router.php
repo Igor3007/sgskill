@@ -1,5 +1,7 @@
 <?php
 
+
+
 function getCurrentRoute()
 {
     if (($pos = strpos($_SERVER['REQUEST_URI'], '?')) !== false) {
@@ -20,10 +22,13 @@ $route = getCurrentRoute();
 $PAGE = [
 
     'TEMPLATE' => 'login',
+    'SEO_TITLE' => 'sg-skill',
+    'SEO_DESC' =>  'sg-skill',
+    'SEO_KEY'  =>  'sg-skill',
 
     'STYLES' => [
         '/styles/site.css',
-
+        '/styles/common-site.css'
     ],
 
     'SCRIPTS' => [
@@ -64,6 +69,10 @@ switch ($route[0]) {
         ];
         $PAGE['SCRIPTS'][] = '/js/user.js';
 
+        $PAGE['SCRIPTS'][] = '/js/fancybox.umd.js';
+        $PAGE['STYLES'][]  = '/styles/lib/fancybox-4.css';
+
+
         $PAGE['BREADCRUMBS']['/user'] = 'Личный кабинет';
         $PAGE['h1'] = 'Мои курсы';
 
@@ -82,6 +91,8 @@ switch ($route[0]) {
             case 'lesson':
                 $PAGE['BREADCRUMBS']['/user/courses/'] = 'Мои курсы';
                 $PAGE['TEMPLATE'] = 'lesson';
+
+
 
                 require_once('controllers/Lesson.php');
                 break;
@@ -106,9 +117,10 @@ switch ($route[0]) {
 
         $PAGE['TEMPLATE'] = 'blog';
         $PAGE['SCRIPTS'][] = '/js/main.js';
-        $PAGE['STYLES'][] = '/styles/common-site.css';
+        //$PAGE['STYLES'][] = '/styles/common-site.css';
+        $PAGE['SEO_TITLE'] = 'Блог - sg-skill';
 
-        require_once('controllers/blog.php');
+        require_once('controllers/Blog.php');
 
         switch ($route[1]) {
             case 'article':
@@ -119,25 +131,37 @@ switch ($route[0]) {
 
                 require_once('controllers/BlogArticle.php');
 
+                $PAGE['SEO_TITLE'] = ($data['seo_title'] ? $data['seo_title'] : $data['title']);
+                $PAGE['SEO_DESC']  = $data['seo_desc'];
+                $PAGE['SEO_KEY']   = $data['seo_keywords'];
+
                 break;
 
             case 'category':
-
                 $PAGE['TEMPLATE']  = 'blog';
-
-
                 require_once('controllers/BlogCategory.php');
+                break;
 
+            case 'tag':
+                $PAGE['TEMPLATE']  = 'blog-tag';
+                require_once('controllers/BlogTags.php');
                 break;
         }
 
         break;
 
-    case 'about':
+    case 'page':
 
         $PAGE['TEMPLATE'] = 'page';
         $PAGE['SCRIPTS'][] = '/js/main.js';
-        $PAGE['h1'] = 'О проекте';
+        $PAGE['SCRIPTS'][] = '/js/fancybox.umd.js';
+        $PAGE['STYLES'][]  = '/styles/lib/fancybox-4.css';
+
+        require_once('controllers/Pages.php');
+
+        $PAGE['SEO_TITLE'] = ($data['seo_title'] ? $data['seo_title'] : $data['title']);
+        $PAGE['SEO_DESC']  = $data['seo_desc'];
+        $PAGE['SEO_KEY']   = $data['seo_keywords'];
 
         break;
 
@@ -162,8 +186,8 @@ switch ($route[0]) {
 
     default:
 
-        $PAGE['TEMPLATE'] = 'blog';
-        $PAGE['SCRIPTS'][] = '/js/main.js';
+        $PAGE['SCRIPTS'][] = '/js/fancybox.umd.js';
+        $PAGE['STYLES'][]  = '/styles/lib/fancybox-4.css';
 
-        require_once('controllers/blog.php');
+        require_once('controllers/RouterDefault.php');
 };

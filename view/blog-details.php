@@ -9,7 +9,7 @@
         <div class="blog-details__tags">
           <ul>
             <? foreach (explode(',', $data['tags']) as $tag) : ?>
-              <li><a href="/blog/tag/<?= $tag ?>"><?= $tag ?></a></li>
+              <li><a href="/blog/tag/<?= substr(trim($tag), 1) ?>"><?= $tag ?></a></li>
             <? endforeach; ?>
           </ul>
         </div>

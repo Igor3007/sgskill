@@ -25,7 +25,20 @@ function getLessonListAll(){
             FROM `sll_lesson`
      ";
 
-    $query = mysqli_query($id_db, $sql) or die('error getLessonList:'.mysqli_error($id_db));
+    $query = mysqli_query($id_db, $sql) or die('error getLessonListAll:'.mysqli_error($id_db));
+
+    return $query ? mysqli_fetch_all($query, MYSQLI_ASSOC) : false;
+}
+
+function getLessonListAllUnlock(){
+    global $id_db;
+
+    $sql = "SELECT *
+            FROM `sll_lesson`
+            WHERE `status` = 1
+     ";
+
+    $query = mysqli_query($id_db, $sql) or die('error getLessonListAll:'.mysqli_error($id_db));
 
     return $query ? mysqli_fetch_all($query, MYSQLI_ASSOC) : false;
 }
@@ -193,8 +206,3 @@ function getNextLesson($lesson_id){
 
 
 }
-
-
-
-
-?>

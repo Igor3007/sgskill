@@ -40,6 +40,14 @@ switch ($_GET['method']) {
     case 'createPost':
         require_once('controllers/CreatePost.php');
         break;
+
+    case 'createPage':
+        require_once('controllers/CreatePage.php');
+        break;
+
+    case 'changeConfig':
+        require_once('controllers/ChangeConfig.php');
+        break;
 }
 
 
