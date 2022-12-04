@@ -35,7 +35,7 @@ function parseLesson($item){
             
             return '
                 <div class="lesson-box__video">
-                    <div class="video" data-id="'.$item['link'].'">
+                    <div class="video" data-id="'.$item['link'].'" data-poster="'.$item['image'].'">
                         <div class="video__preview">
                         <picture>
                             <img src="'.$item['image'].'" loading="lazy" alt="image"/>

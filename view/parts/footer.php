@@ -26,14 +26,20 @@
          <div class="main-menu__nav">
            <nav>
              <ul>
+              
+                <? if ($_SESSION['user']) : ?>
+                  <li> <a href="/user/"> <span>Мои курсы</span> </a> </li>
+                <? endif; ?>
 
-               <? foreach ($SETTING['menu']['left'] as $item) : ?>
-                 <li><a href="<?= $item[1] ?>"><?= $item[0] ?></a></li>
-               <? endforeach; ?>
+                <? foreach ($SETTING['menu']['left'] as $item) : ?>
+                  <li><a href="<?= $item[1] ?>"><?= $item[0] ?></a></li>
+                <? endforeach; ?>
 
-               <? foreach ($SETTING['menu']['right'] as $item) : ?>
-                 <li><a href="<?= $item[1] ?>"><?= $item[0] ?></a></li>
-               <? endforeach; ?>
+                <li><a href="<?= $SETTING['menu']['right'][1][1] ?>"><?= $SETTING['menu']['right'][1][0] ?></a></li>
+
+                <? if (!$_SESSION['user']) : ?>
+                  <li><a href="<?= $SETTING['menu']['right'][2][1] ?>"><?= $SETTING['menu']['right'][2][0] ?></a></li>
+                <? endif; ?>
 
              </ul>
            </nav>

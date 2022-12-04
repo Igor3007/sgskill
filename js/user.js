@@ -210,9 +210,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     if (document.querySelectorAll('.video').length) {
         document.querySelectorAll('.video').forEach(item => {
-            item.addEventListener('click', e => {
+             
 
                 let url = item.dataset.id
+                let pst = item.dataset.poster
                 let containerWidth = item.clientWidth
                 let containerHeight = (item.clientHeight)
                 let id = url.replace(/\D+/g, "")
@@ -221,29 +222,44 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 player.id = 'video_' + id
                 player.classList.add('play')
 
-                item.innerHTML = '';
+
+
+                
                 item.append(player);
 
 
-                Kinescope.IframePlayer.create(player.id, {
+                let instanse = Kinescope.IframePlayer.create(player.id, {
                         url: url,
                         size: {
                             width: containerWidth,
                             height: containerHeight
                         },
-                        behaviour: {
-                            autoPlay: true
+                        PlaylistItemOptions: {
+                            poster : pst
                         }
+                       
+                         
                     })
                     .then(function (player) {
                         player.once(player.Events.Ready, function (event) {
                             event.target.setVolume(0.5);
-                            player.play();
+                        })
+
+                        item.addEventListener('click', function(e){
+                            
+                            player.play()
+
+                            setTimeout(()=>{
+                                e.target.closest('.video').classList.add('play')
+                            }, 200)
+
                         })
 
                     });
 
-            })
+                
+
+            
         })
     }
 

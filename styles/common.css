@@ -53,6 +53,9 @@
     display: block;
 }
 
+
+
+
 /* ================== */
 
 
@@ -554,10 +557,7 @@
     border-radius: 0;
 }
 
-.lesson-box__video {
-    border: 2px solid #bbb;
-    padding: 10px;
-}
+
 
 .video__action {
     background-color: rgba(0, 0, 0, 0) !important;
@@ -964,6 +964,25 @@ span[data-timer="sec"] {
     margin-bottom: -6px;
 }
 
+.video:not(.play) iframe {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video__preview {
+    position: relative;
+    z-index: 2;
+}
+
+.video__action {
+    z-index: 3;
+}
+
+
 
 
 @media screen and (min-width: 767px) {
@@ -972,6 +991,11 @@ span[data-timer="sec"] {
         margin: 0 auto;
         display: block;
     }
+
+    .lesson-box__video {
+        border: 2px solid #bbb;
+        padding: 10px;
+    }
 }
 
 .user-moderator .img-table-64 {
@@ -979,7 +1003,23 @@ span[data-timer="sec"] {
     box-shadow: 0 0 0 2px #d44277;
 }
 
+@media screen and (max-width: 1200px) {
+
+    .card-cours__image {
+        padding-bottom: 25px;
+    }
+
+    .card-cours__image img,
+    .card-cours__image {
+        max-width: none;
+        width: 100%;
+
+    }
+}
+
 @media screen and (max-width: 768px) {
+
+
     .head-moderator__title h1 {
         font-size: 24px;
     }
@@ -989,9 +1029,20 @@ span[data-timer="sec"] {
         position: relative;
         top: 1px;
     }
+
+    .moderator-aside__cpanel {
+        text-align: center;
+    }
 }
 
 @media screen and (max-width: 576px) {
+
+    .lesson-box__header {
+        padding: 8px;
+        font-size: 15px;
+        line-height: 120%;
+    }
+
     .head-moderator__breadcrumb ul {
         display: flex;
         align-items: center;
