@@ -121,6 +121,7 @@
                           <li data-editor-block="task"> <span class="ic_task" title="Задание"></span> </li>
                           <li data-editor-block="file"> <span class="ic_file" title="файл"></span> </li>
                           <li data-editor-block="link"> <span class="ic_link" title="ссылка"></span> </li>
+                          <li data-editor-block="stories"> <span class="ic_stories" title="series"></span></li>
                         </ul>
                       </div>
                       <div class="editor__content">

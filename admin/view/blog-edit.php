@@ -85,7 +85,8 @@
                   </div>
                 </div>
 
-                <div class="form__label">Хеш теги</div>
+                <div class="form__label">Хеш теги</p>
+                </div>
 
                 <div class="form__item">
                   <div class="form__subitem">
@@ -131,6 +132,7 @@
                           <li data-editor-block="task"> <span class="ic_task" title="Задание"></span> </li>
                           <li data-editor-block="file"> <span class="ic_file" title="файл"></span> </li>
                           <li data-editor-block="link"> <span class="ic_link" title="ссылка"></span> </li>
+                          <li data-editor-block="stories"> <span class="ic_stories" title="series"></span></li>
                         </ul>
                       </div>
                       <div class="editor__content">
@@ -169,7 +171,70 @@
 
               </div>
             </form>
+
+            <div class="page-moderator__comments">
+
+              <div class="post-comment">
+
+                <div class="post-comment__head">
+                  <div class="post-comment__title">Коментарии</div>
+                  <div class="post-comment__add">
+                    <button class="btn btn-small" data-comment-edit="" data-post-id="<?= $data['id'] ?>">Добавить</button>
+                  </div>
+                </div>
+
+                <div class="post-comment__list">
+
+
+
+                  <? if ($comments) : ?>
+
+                    <? foreach ($comments as $item) : ?>
+
+
+
+                      <div class="card-comments">
+
+                        <div class="card-comments__image">
+                          <picture>
+                            <a href="<?= $item['link'] ?>" rel="nofollow">
+                              <img src="<?= getMediaURL($item['image'])['orig'] ?>" alt="">
+                            </a>
+                          </picture>
+                        </div>
+
+                        <div class="card-comments__main">
+
+                          <div class="card-comments__name">
+                            <a href="<?= $item['link'] ?>"><?= $item['name'] ?></a>
+                          </div>
+                          <div class="card-comments__text" data-comment="show-text"><?= $item['text'] ?></div>
+
+                          <div class="card-comments__prop">
+                            <div class="card-comments__status"><?= (!$item['status'] ? '<span class="status-locked" >Заблокирован</span>' : '') ?></div>
+                            <div class="card-comments__edit" data-comment-edit="<?= $item['id'] ?>" data-post-id="<?= $data['id'] ?>">Изменить</div>
+                            <div class="card-comments__date"><?= setDates($item['date_create'], array(true, false)) ?></div>
+                          </div>
+
+                        </div>
+
+                      </div>
+
+                    <? endforeach; ?>
+
+                  <? else : ?>
+                    <div class="editor__empty">Для данного поста нет коментарием</div>
+                  <? endif; ?>
+
+                </div>
+
+              </div>
+
+            </div>
           </div>
+
+
+
         </div>
       </div>
     </div>

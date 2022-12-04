@@ -204,64 +204,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     const MATERIAL_INPUT = new materialInput()
     MATERIAL_INPUT.init()
 
-    /* ===========================================
-    video
-    =========================================== */
-
-    if (document.querySelectorAll('.video').length) {
-        document.querySelectorAll('.video').forEach(item => {
-             
-
-                let url = item.dataset.id
-                let pst = item.dataset.poster
-                let containerWidth = item.clientWidth
-                let containerHeight = (item.clientHeight)
-                let id = url.replace(/\D+/g, "")
-
-                let player = document.createElement('iframe');
-                player.id = 'video_' + id
-                player.classList.add('play')
-
-
-
-                
-                item.append(player);
-
-
-                let instanse = Kinescope.IframePlayer.create(player.id, {
-                        url: url,
-                        size: {
-                            width: containerWidth,
-                            height: containerHeight
-                        },
-                        PlaylistItemOptions: {
-                            poster : pst
-                        }
-                       
-                         
-                    })
-                    .then(function (player) {
-                        player.once(player.Events.Ready, function (event) {
-                            event.target.setVolume(0.5);
-                        })
-
-                        item.addEventListener('click', function(e){
-                            
-                            player.play()
-
-                            setTimeout(()=>{
-                                e.target.closest('.video').classList.add('play')
-                            }, 200)
-
-                        })
-
-                    });
-
-                
-
-            
-        })
-    }
 
     /* =================================================
     back timer for lesson

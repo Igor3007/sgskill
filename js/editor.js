@@ -389,6 +389,99 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     }
 
+    class editorComponentStories {
+        constructor() {
+            this.createElement()
+            this.elem = null;
+        }
+
+        init(block) {
+
+            this.elem = block;
+            this.uploadFile(block);
+
+            block.querySelectorAll('.editor-gallery picture').forEach(item => {
+                this.removeImage(item)
+            })
+
+            this.initSortable();
+
+        }
+
+        removeImage(element) {
+            element.querySelector('.egallery-remove').addEventListener('click', e => {
+                if (confirm('Удалить фото ?')) {
+                    e.target.closest('picture').remove()
+                }
+
+            })
+        }
+
+        uploadFile(element) {
+            element.querySelector('[type="file"]').addEventListener('change', e => {
+
+                if (this.elem.querySelector('.editor__empty')) {
+                    this.elem.querySelector('.editor__empty').remove()
+                }
+
+                let uploadInstanse = new editorFileUpload(e.target.files)
+                uploadInstanse.upload('image', (event) => {
+
+
+
+
+                    let file = document.createElement('picture')
+                    file.innerHTML = '<img data-upload-src="' + event.file.orig + '" src="' + event.file.orig + '" alt=""> <input type="text" placeholder="Ссылка на видео" data-strories-link="" > <span class="egallery-remove">+</span>'
+                    this.removeImage(file)
+                    this.elem.querySelector('.editor-gallery__images').append(file)
+
+
+                    //init sortable
+
+                    this.initSortable();
+
+                })
+
+
+            })
+        }
+
+        initSortable() {
+            new Sortable(this.elem.querySelector('.editor-gallery__images'), {
+                animation: 150,
+                direction: 'horizontal',
+            });
+        }
+
+        createElement() {
+            this.elem = document.createElement('div')
+            this.elem.innerHTML = this.template()
+            this.uploadFile(this.elem)
+
+            return this.elem;
+        }
+
+        template() {
+            return `
+            <div class="editor-gallery">
+                <div class="editor-gallery__images">
+                    <div class="editor__empty" >Сначала выберите превью для ролика, а затем добавте ссылку на видео. (Только сервис kinescope.ru)</div>
+                </div>
+                <div class="editor-gallery__action">
+                    <label class="attach-file-editor">
+                    <input type="file" name="file-editor">
+                    <span> Выбрать превью </span>
+                    </label>
+                </div>
+            </div>
+            `
+        }
+
+        getElement() {
+            return this.createElement()
+        }
+    }
+
 
     class postEditor {
 
@@ -415,6 +508,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
                     case 'image':
                         new editorComponentImage().init(item)
+                        break;
+
+                    case 'stories':
+                        new editorComponentStories().init(item)
                         break;
 
                     case 'audio':
@@ -501,6 +598,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
 
                     switch (item.dataset.editorBlock) {
+
                         case 'header':
                             this.insertBlock({
                                 elem: new editorComponentHeader().template(),
@@ -544,6 +642,15 @@ document.addEventListener('DOMContentLoaded', function (event) {
                         case 'image':
                             this.insertBlock({
                                 elem: new editorComponentImage().getElement(),
+                                type: 'element',
+                                name: item.dataset.editorBlock
+                            })
+                            break;
+
+                        case 'stories':
+
+                            this.insertBlock({
+                                elem: new editorComponentStories().getElement(),
                                 type: 'element',
                                 name: item.dataset.editorBlock
                             })
@@ -599,6 +706,24 @@ document.addEventListener('DOMContentLoaded', function (event) {
                         arrayResult.push({
                             type: block.dataset.contentBlock,
                             image: arrImage
+                        })
+
+                        break;
+
+                    case 'stories':
+
+                        let arrStrories = [];
+
+                        block.querySelectorAll('[data-upload-src]').forEach(img => {
+                            arrStrories.push({
+                                link: img.parentNode.querySelector('[data-strories-link]').value,
+                                preview: img.dataset.uploadSrc,
+                            })
+                        })
+
+                        arrayResult.push({
+                            type: block.dataset.contentBlock,
+                            list: arrStrories
                         })
 
                         break;

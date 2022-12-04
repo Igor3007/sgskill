@@ -6237,9 +6237,11 @@ section.section-blog {
 }
 
 .blog-post__image a {
-  display: block;
-  width: 80px;
-  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -6252,8 +6254,8 @@ section.section-blog {
 }
 
 .blog-post__image a span {
-  width: 100%;
-  height: 100%;
+  width: 80px;
+  height: 80px;
   display: block;
   background-color: #ffffff29;
   background-size: 80% auto;
@@ -6566,6 +6568,14 @@ section.section-blog {
   }
 
   .blog-post__image a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .blog-post__image a span {
     width: 130px;
     height: 130px;
   }

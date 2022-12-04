@@ -121,7 +121,6 @@ switch ($route[0]) {
 
         $PAGE['TEMPLATE'] = 'blog';
         $PAGE['SCRIPTS'][] = '/js/main.js';
-        //$PAGE['STYLES'][] = '/styles/common-site.css';
         $PAGE['SEO_TITLE'] = 'Блог - sg-skill';
 
         require_once('controllers/Blog.php');
@@ -132,6 +131,7 @@ switch ($route[0]) {
                 $PAGE['TEMPLATE']  = 'blog-details';
                 $PAGE['SCRIPTS'][] = '/js/fancybox.umd.js';
                 $PAGE['STYLES'][]  = '/styles/lib/fancybox-4.css';
+                $PAGE['SCRIPTS'][] = 'https://player.kinescope.io/latest/iframe.player.js';
 
                 require_once('controllers/BlogArticle.php');
 
@@ -160,6 +160,7 @@ switch ($route[0]) {
         $PAGE['SCRIPTS'][] = '/js/main.js';
         $PAGE['SCRIPTS'][] = '/js/fancybox.umd.js';
         $PAGE['STYLES'][]  = '/styles/lib/fancybox-4.css';
+        $PAGE['SCRIPTS'][] = 'https://player.kinescope.io/latest/iframe.player.js';
 
         require_once('controllers/Pages.php');
 
@@ -192,6 +193,7 @@ switch ($route[0]) {
 
         $PAGE['SCRIPTS'][] = '/js/fancybox.umd.js';
         $PAGE['STYLES'][]  = '/styles/lib/fancybox-4.css';
+        $PAGE['SCRIPTS'][] = 'https://player.kinescope.io/latest/iframe.player.js';
 
         require_once('controllers/RouterDefault.php');
 };

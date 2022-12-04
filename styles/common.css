@@ -379,6 +379,10 @@
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDgiIHdpZHRoPSI0OCI+PHBhdGggZD0iTTIyLjUgMzRIMTRxLTQuMTUgMC03LjA3NS0yLjkyNVQ0IDI0cTAtNC4xNSAyLjkyNS03LjA3NVQxNCAxNGg4LjV2M0gxNHEtMi45IDAtNC45NSAyLjA1UTcgMjEuMSA3IDI0cTAgMi45IDIuMDUgNC45NVExMS4xIDMxIDE0IDMxaDguNXptLTYuMy04LjV2LTNoMTUuNXYzek00NCAyNGgtM3EwLTIuOS0yLjA1LTQuOTVRMzYuOSAxNyAzNCAxN2gtOC41di0zSDM0cTQuMTUgMCA3LjA3NSAyLjkyNVQ0NCAyNHptLTkuMDUgMTZ2LTZoLTZ2LTNoNnYtNmgzdjZoNnYzaC02djZ6Ii8+PC9zdmc+);
 }
 
+.ic_stories {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgyIiBoZWlnaHQ9IjQ4MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBjbGlwLXBhdGg9InVybCgjcHJlZml4X19jbGlwMF8zNjBfMzkpIj48cmVjdCB4PSIxMzciIHk9Ijc5IiB3aWR0aD0iMjE2IiBoZWlnaHQ9IjMxOSIgcng9IjI4IiBmaWxsPSIjNUE1QTVBIi8+PHJlY3QgeD0iLTEwOCIgeT0iNzkiIHdpZHRoPSIyMTYiIGhlaWdodD0iMzE5IiByeD0iMjgiIGZpbGw9IiNDRUNFQ0UiLz48cmVjdCB4PSIzODAiIHk9IjgyIiB3aWR0aD0iMjE2IiBoZWlnaHQ9IjMxOSIgcng9IjI4IiBmaWxsPSIjQ0VDRUNFIi8+PHBhdGggZD0iTTIzNiAyNjUuNjZ2LTQ5LjA3NWMwLTMuNTUzIDQuMjg4LTUuMzQyIDYuODE0LTIuODQzbDI1LjI1OSAyNC45OTVhNCA0IDAgMDEtLjA1NCA1LjczOGwtMjUuMjU5IDI0LjA4Yy0yLjU0NiAyLjQyOC02Ljc2LjYyMy02Ljc2LTIuODk1eiIgZmlsbD0iI2ZmZiIvPjwvZz48ZGVmcz48Y2xpcFBhdGggaWQ9InByZWZpeF9fY2xpcDBfMzYwXzM5Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwaDQ4MnY0ODJIMHoiLz48L2NsaXBQYXRoPjwvZGVmcz48L3N2Zz4=);
+}
+
 .ic_task {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNDgiIHdpZHRoPSI0OCI+PHBhdGggZD0iTTExLjEgMzcuM0w0IDMwLjJsMi4xLTIuMSA1IDQuOTUgOC45NS04Ljk1IDIuMSAyLjE1em0wLTE2TDQgMTQuMmwyLjEtMi4xIDUgNC45NSA4Ljk1LTguOTUgMi4xIDIuMTV6TTI2IDMzLjV2LTNoMTh2M3ptMC0xNnYtM2gxOHYzeiIvPjwvc3ZnPg==);
 }
@@ -983,7 +987,116 @@ span[data-timer="sec"] {
 }
 
 
+.post-comment__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+}
 
+.card-comments__text:not(.open) {
+    display: -webkit-box;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    cursor: pointer;
+}
+
+.post-comment__title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    color: #333;
+}
+
+.card-comments {
+    display: flex;
+}
+
+.card-comments__image {
+    width: 70px;
+    min-width: 70px;
+}
+
+.card-comments__image picture {
+    display: block;
+    padding-top: 100%;
+    background-color: #eee;
+    position: relative;
+    border-radius: 50%;
+}
+
+.card-comments__image img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.card-comments__main {
+    padding-left: 25px;
+    width: 100%;
+}
+
+.card-comments__name {
+    font-weight: 600;
+    font-size: 16px;
+    padding-bottom: 7px;
+}
+
+
+
+.card-comments__date {
+    color: #777;
+    margin-left: 15px;
+    font-size: 13px;
+}
+
+.card-comments__prop {
+    display: flex;
+    border-top: 1px solid #ecebeb;
+    margin-top: 10px;
+    padding-top: 5px;
+}
+
+.card-comments {
+    margin-bottom: 13px;
+}
+
+.post-comment {
+    padding-top: 50px;
+}
+
+.card-comments__edit {
+    margin-left: auto;
+    font-size: 13px;
+    color: #007cff;
+    cursor: pointer;
+}
+
+
+.form-image.form-image--small {
+    max-width: 150px;
+}
+
+.form-add-comment {
+    padding: 30px;
+}
+
+.two-checkbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 52px;
+}
+
+.status-locked {
+    color: #f00;
+}
 
 @media screen and (min-width: 767px) {
     .lesson-box__audio audio {
@@ -1003,6 +1116,9 @@ span[data-timer="sec"] {
     box-shadow: 0 0 0 2px #d44277;
 }
 
+
+
+
 @media screen and (max-width: 1200px) {
 
     .card-cours__image {
@@ -1018,6 +1134,50 @@ span[data-timer="sec"] {
 }
 
 @media screen and (max-width: 768px) {
+
+    .page-moderator__topbar {
+        margin: 0 -15px;
+    }
+
+
+    .editor {
+        flex-direction: column;
+    }
+
+    .editor__aside ul {
+        display: flex;
+        overflow: auto;
+        padding-bottom: 5px;
+    }
+
+    .editor__aside {}
+
+    .editor__aside li {
+        margin: 0px 3px;
+        padding: 0 10px;
+    }
+
+    .editor__aside {
+        margin-bottom: 15px;
+        margin-left: -3px;
+    }
+
+    .card-comments__image {
+        width: 45px;
+        min-width: 45px;
+    }
+
+    .card-comments__text {
+        font-size: 13px;
+    }
+
+    .card-comments__name {
+        font-size: 14px;
+    }
+
+    .card-comments__main {
+        padding-left: 10px;
+    }
 
 
     .head-moderator__title h1 {

@@ -120,11 +120,11 @@ function parseLesson($item)
 
 
             $gallery = '';
-            $gallery_id = preg_replace("/[^,.0-9]/", '', md5($item['image'][0]['url']));
+            // $gallery_id = preg_replace("/[^,.0-9]/", '', md5($item['image'][0]['url']));
 
             foreach ($item['image'] as $img) {
                 $gallery .= '<div class="post-box__item">
-                                <a href="' . $img['url'] . '" data-fancybox="gallery-' . $gallery_id . '">
+                                <a href="' . $img['url'] . '" data-fancybox="gallery">
                                     <picture> <img src="' . $img['url'] . '" alt="" srcset=""> </picture>
                                 </a>
                             </div>';
@@ -133,6 +133,39 @@ function parseLesson($item)
             return '
                 <div class="post-box__image">
                     <div class="post-box__wrp">' . $gallery . '</div>
+                </div>
+            ';
+
+            break;
+
+        case 'stories':
+
+
+            $gallery = '';
+            // $gallery_id = preg_replace("/[^,.0-9]/", '', md5($item['image'][0]['url']));
+
+            foreach ($item['list'] as $video) {
+                $gallery .= '<div class="post-box__movie">
+                                <div class="video" data-id="' . $video['link'] . '">
+                                    <div class="video__preview">
+                                    <picture>
+                                        <img src="' . $video['preview'] . '" loading="lazy" alt="image"/>
+                                    </picture>
+                                    </div>
+                                    <div class="video__action">
+                                        <div class="video__button">
+                                            <svg width="70" height="70">
+                                            <use xlink:href="/img/sprites/sprite.svg#ic_play"></use>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>';
+            }
+
+            return '
+                <div class="post-box__stories">
+                    <div class="post-box__movieInner">' . $gallery . '</div>
                 </div>
             ';
 

@@ -33,6 +33,14 @@ switch ($_GET['method']) {
         require_once('controllers/_popupformCatigBlog.php');
         break;
 
+    case 'formCommentPopupHtml':
+        require_once('controllers/_popupformComment.php');
+        break;
+
+    case 'formPopupComment':
+        require_once('controllers/createComment.php');
+        break;
+
     case 'formCatigSave':
         require_once('controllers/BlogCategoriesCreate.php');
         break;

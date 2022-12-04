@@ -47,6 +47,8 @@
                     <div class="blog-post__title"><a href="/blog/article/<?= $item['alias'] ?>"><?= $item['title'] ?></a></div>
                     <div class="blog-post__desc"><?= $item['pretext'] ?></div>
                   </div>
+
+
                 </div>
               </div>
 

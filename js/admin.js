@@ -731,10 +731,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
     }
 
 
-
-
-
-
     /* ============================================
     popup select lesson
     ============================================*/
@@ -785,6 +781,95 @@ document.addEventListener('DOMContentLoaded', function (event) {
         })
 
     }
+
+
+
+    /* ============================================
+    show fulltext comment
+    ============================================*/
+
+    if (document.querySelector('[data-comment="show-text"]')) {
+        document.querySelectorAll('[data-comment="show-text"]').forEach(item => {
+            item.addEventListener('click', (e) => {
+                item.classList.toggle('open')
+            })
+        })
+    }
+
+    /* ==========================================
+    create comment 
+    ========================================== */
+    if (document.querySelector('[data-comment-edit]')) {
+
+        document.querySelectorAll('[data-comment-edit]').forEach(item => {
+
+            item.addEventListener('click', function (event) {
+
+
+                let popup = new customModal()
+                let url = URL_API + 'formCommentPopupHtml';
+                let data = new FormData();
+
+                data.append('comment_id', event.target.dataset.commentEdit)
+                data.append('post_id', event.target.dataset.postId)
+
+
+                popup.open('<div>Loading...</div>', function (instanse) {
+
+                    window.ajax({
+                        type: 'POST',
+                        data,
+                        url: url,
+                    }, function (status, response) {
+
+                        popup.changeContent(response)
+
+                        window.initDatepicker(popup.modal.querySelector('.input-datepicker'), false)
+
+                        popup.modal.querySelectorAll('[data-attach=poster]').forEach(function (poster) {
+                            poster.addEventListener('change', function () {
+
+                                let files = this.files;
+                                let elem = this;
+
+                                sendFiles(files, elem, function (dataImage) {
+
+                                    elem.closest('[data-image-upload="form"]').classList.add('cover--loaded')
+                                    elem.closest('[data-image-upload="form"]').querySelector('[data-attach="preview-poster"]').src = dataImage
+
+                                });
+
+                            })
+                        })
+
+                        popup.modal.querySelector('form').addEventListener('submit', function (e) {
+
+                            e.preventDefault()
+                            let dataSend = new FormData(this);
+
+                            window.ajax({
+                                type: 'POST',
+                                data: dataSend,
+                                responseType: 'json',
+                                url: URL_API + 'formPopupComment',
+                            }, function (status, response) {
+                                window.STATUS.msg(response.msg)
+                                window.location.reload()
+                                popup.close()
+                            })
+
+                        })
+
+
+                    })
+                })
+            })
+
+        })
+
+    }
+
+
 
 
 

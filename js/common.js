@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
 
             this.close = function () {
-                if(this.container){
+                if (this.container) {
                     this.container.classList.remove('open')
                 }
                 this.btn.classList.remove('open')
@@ -320,6 +320,79 @@ document.addEventListener("DOMContentLoaded", function (event) {
         });
     }
 
+
+    /* ===========================================
+    video
+    =========================================== */
+
+    if (document.querySelectorAll('.video').length) {
+        document.querySelectorAll('.video').forEach(item => {
+
+
+            if (!item.dataset.id) {
+                console.error('Video: Нету ссылки для воспроизведения')
+
+                item.addEventListener('click', function (e) {
+                    window.STATUS.err('Video: Нету ссылки для воспроизведения')
+                })
+                return false
+            }
+
+
+            let url = item.dataset.id
+            let pst = item.dataset.poster
+            let containerWidth = item.clientWidth
+            let containerHeight = (item.clientHeight)
+            let id = url.replace(/\D+/g, "")
+
+
+
+            let player = document.createElement('iframe');
+            player.id = 'video_' + id
+            player.classList.add('play')
+
+
+
+
+            item.append(player);
+
+
+            let instanse = Kinescope.IframePlayer.create(player.id, {
+                    url: url,
+                    size: {
+                        width: containerWidth,
+                        height: containerHeight
+                    },
+                    PlaylistItemOptions: {
+                        poster: pst
+                    }
+
+
+                })
+                .then(function (player) {
+                    player.once(player.Events.Ready, function (event) {
+                        event.target.setVolume(0.5);
+                    })
+
+                    item.addEventListener('click', function (e) {
+
+
+
+                        player.play()
+
+                        setTimeout(() => {
+                            e.target.closest('.video').classList.add('play')
+                        }, 200)
+
+                    })
+
+                });
+
+
+
+
+        })
+    }
 
 
 
